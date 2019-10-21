@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{8e56f79e-0680-4ba7-9ce1-c3a46e2cf293}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{e983e766-ef2d-439f-a906-f429db209bc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\AI">
+      <UniqueIdentifier>{7da00bb5-b2c5-428c-a98d-58c0aec5001f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Audio">
+      <UniqueIdentifier>{296dd06d-1412-4a9f-98b1-337a4d2122a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Camera">
+      <UniqueIdentifier>{f796a1c9-5201-4a85-89b9-f1396f30edeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Canvas">
+      <UniqueIdentifier>{e7851001-1635-48bf-990d-5cf21d283257}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\CanvasRenderer">
+      <UniqueIdentifier>{fa7ac45a-2e8b-4586-a18c-45b74ec8ed96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Light">
+      <UniqueIdentifier>{86bc133a-29b9-4ce3-be59-57bca538a460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\LineRenderer">
+      <UniqueIdentifier>{7466b558-9140-4c55-b6ed-715ee6b96d34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\MeshRenderer">
+      <UniqueIdentifier>{a63ab210-8b03-40a9-a4a5-da4401eee92d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Script">
+      <UniqueIdentifier>{d4085d68-ccc3-4271-975a-1306d144cc9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics">
+      <UniqueIdentifier>{0e253ec5-3193-47dd-bbdf-07e45226d530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Transform">
+      <UniqueIdentifier>{97d35e41-ba25-4d54-954e-865047903a2e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\GameCodeApp.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Actor.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AudioComponent\AudioComponent.cpp">
+      <Filter>Components\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\TransformComponent\TransformComponent.cpp">
+      <Filter>Components\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\PhysicsComponent\BoxColliderComponent.cpp">
+      <Filter>Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\ScriptComponent\RayTracingComponent.cpp">
+      <Filter>Components\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\ScriptComponent\ImageComponent.cpp">
+      <Filter>Components\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\ScriptComponent\TextComponent.cpp">
+      <Filter>Components\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\ScriptComponent\EventSystemComponent.cpp">
+      <Filter>Components\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\ScriptComponent\InputComponent.cpp">
+      <Filter>Components\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\AIComponent\PathfindingComponent.cpp">
+      <Filter>Components\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\MeshRendererComponent\MeshRendererComponent.cpp">
+      <Filter>Components\MeshRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\LineRendererComponent\LineRendererComponent.cpp">
+      <Filter>Components\LineRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\CameraComponent\CameraComponent.cpp">
+      <Filter>Components\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\CanvasRendererComponent\CanvasRendererComponent.cpp">
+      <Filter>Components\CanvasRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\CanvasComponent\CanvasComponent.cpp">
+      <Filter>Components\Canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\LightComponent\LightComponent.cpp">
+      <Filter>Components\Light</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Base\GameCodeApp.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Actor.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\ActorComponent.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AIComponent\IAIComponent.h">
+      <Filter>Components\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AudioComponent\IAudioComponent.h">
+      <Filter>Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CameraComponent\ICameraComponent.h">
+      <Filter>Components\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CanvasComponent\ICanvasComponent.h">
+      <Filter>Components\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CanvasRendererComponent\ICanvasRendererComponent.h">
+      <Filter>Components\CanvasRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\LightComponent\ILightComponent.h">
+      <Filter>Components\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\LineRendererComponent\ILineRendererComponent.h">
+      <Filter>Components\LineRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\MeshRendererComponent\IMeshRendererComponent.h">
+      <Filter>Components\MeshRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ScriptComponent\IScriptComponent.h">
+      <Filter>Components\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\PhysicsComponent\IPhysicsComponent.h">
+      <Filter>Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AudioComponent\AudioComponent.h">
+      <Filter>Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\TransformComponent\TransformComponent.h">
+      <Filter>Components\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\PhysicsComponent\BoxColliderComponent.h">
+      <Filter>Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\TransformComponent\ITransformComponent.h">
+      <Filter>Components\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ScriptComponent\RayTracingComponent.h">
+      <Filter>Components\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ScriptComponent\ImageComponent.h">
+      <Filter>Components\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ScriptComponent\TextComponent.h">
+      <Filter>Components\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ScriptComponent\EventSystemComponent.h">
+      <Filter>Components\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ScriptComponent\InputComponent.h">
+      <Filter>Components\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AIComponent\PathfindingComponent.h">
+      <Filter>Components\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\MeshRendererComponent\MeshRendererComponent.h">
+      <Filter>Components\MeshRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\LineRendererComponent\LineRendererComponent.h">
+      <Filter>Components\LineRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CameraComponent\CameraComponent.h">
+      <Filter>Components\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CanvasRendererComponent\CanvasRendererComponent.h">
+      <Filter>Components\CanvasRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CanvasComponent\CanvasComponent.h">
+      <Filter>Components\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\LightComponent\LightComponent.h">
+      <Filter>Components\Light</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
