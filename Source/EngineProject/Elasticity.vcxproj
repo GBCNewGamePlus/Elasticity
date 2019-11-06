@@ -115,6 +115,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Assets\Scripts\GameKeyboardHandler.cpp" />
+    <ClCompile Include="Assets\Scripts\GamePointerHandler.cpp" />
     <ClCompile Include="Base\Actor.cpp" />
     <ClCompile Include="Base\GameCodeApp.cpp" />
     <ClCompile Include="Components\AIComponent\PathfindingComponent.cpp" />
@@ -135,6 +137,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Assets\Scripts\GameKeyboardHandler.h" />
+    <ClInclude Include="Assets\Scripts\GamePointerHandler.h" />
     <ClInclude Include="Base\Actor.h" />
     <ClInclude Include="Base\ActorComponent.h" />
     <ClInclude Include="Base\GameCodeApp.h" />
@@ -157,8 +161,10 @@
     <ClInclude Include="Components\PhysicsComponent\BoxColliderComponent.h" />
     <ClInclude Include="Components\PhysicsComponent\IPhysicsComponent.h" />
     <ClInclude Include="Components\ScriptComponent\EventSystemComponent.h" />
+    <ClInclude Include="Components\ScriptComponent\IKeyboardHandler.h" />
     <ClInclude Include="Components\ScriptComponent\ImageComponent.h" />
     <ClInclude Include="Components\ScriptComponent\InputComponent.h" />
+    <ClInclude Include="Components\ScriptComponent\IPointerHandler.h" />
     <ClInclude Include="Components\ScriptComponent\IScriptComponent.h" />
     <ClInclude Include="Components\ScriptComponent\RayTracingComponent.h" />
     <ClInclude Include="Components\ScriptComponent\TextComponent.h" />

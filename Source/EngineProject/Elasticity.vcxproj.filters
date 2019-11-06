@@ -52,6 +52,9 @@
     <Filter Include="Components\Transform">
       <UniqueIdentifier>{97d35e41-ba25-4d54-954e-865047903a2e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameScripts">
+      <UniqueIdentifier>{c3102f54-5b19-4df4-92ba-ffe609dd7082}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -107,6 +110,12 @@
     </ClCompile>
     <ClCompile Include="Components\LightComponent\LightComponent.cpp">
       <Filter>Components\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\GameKeyboardHandler.cpp">
+      <Filter>GameScripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\Scripts\GamePointerHandler.cpp">
+      <Filter>GameScripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +205,18 @@
     </ClInclude>
     <ClInclude Include="Components\LightComponent\LightComponent.h">
       <Filter>Components\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ScriptComponent\IKeyboardHandler.h">
+      <Filter>Components\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ScriptComponent\IPointerHandler.h">
+      <Filter>Components\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\GameKeyboardHandler.h">
+      <Filter>GameScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\Scripts\GamePointerHandler.h">
+      <Filter>GameScripts</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
