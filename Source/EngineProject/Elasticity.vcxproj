@@ -134,7 +134,9 @@
     <ClCompile Include="Components\ScriptComponent\RayTracingComponent.cpp" />
     <ClCompile Include="Components\ScriptComponent\TextComponent.cpp" />
     <ClCompile Include="Components\TransformComponent\TransformComponent.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Systems\InputSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Assets\Scripts\GameKeyboardHandler.h" />
@@ -170,6 +172,8 @@
     <ClInclude Include="Components\ScriptComponent\TextComponent.h" />
     <ClInclude Include="Components\TransformComponent\ITransformComponent.h" />
     <ClInclude Include="Components\TransformComponent\TransformComponent.h" />
+    <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="Systems\InputSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

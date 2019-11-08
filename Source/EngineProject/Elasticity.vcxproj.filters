@@ -55,6 +55,9 @@
     <Filter Include="GameScripts">
       <UniqueIdentifier>{c3102f54-5b19-4df4-92ba-ffe609dd7082}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{c10a477b-3888-4503-bdfc-efe268838985}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -116,6 +119,12 @@
     </ClCompile>
     <ClCompile Include="Assets\Scripts\GamePointerHandler.cpp">
       <Filter>GameScripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\InputSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine.cpp">
+      <Filter>Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +226,12 @@
     </ClInclude>
     <ClInclude Include="Assets\Scripts\GamePointerHandler.h">
       <Filter>GameScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\InputSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine.h">
+      <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
