@@ -137,6 +137,7 @@
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Systems\InputSystem.cpp" />
+    <ClCompile Include="Systems\RenderingSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Assets\Scripts\GameKeyboardHandler.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Components\TransformComponent\TransformComponent.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="Systems\InputSystem.h" />
+    <ClInclude Include="Systems\RenderingSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

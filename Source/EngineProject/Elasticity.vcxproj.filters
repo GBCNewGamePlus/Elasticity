@@ -126,6 +126,9 @@
     <ClCompile Include="GameEngine.cpp">
       <Filter>Base</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\RenderingSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\GameCodeApp.h">
@@ -232,6 +235,9 @@
     </ClInclude>
     <ClInclude Include="GameEngine.h">
       <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\RenderingSystem.h">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

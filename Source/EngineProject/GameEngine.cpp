@@ -11,42 +11,8 @@ using namespace std;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam);
 
-GameEngine::GameEngine(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLine, INT nCmdShow)
+GameEngine::GameEngine(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow)
 {
-	static TCHAR szWindowClass[] = _T("win32app");
-	static TCHAR szTitle[] = _T("Elasticity");
-
-	WNDCLASSEX wcex;
-
-	wcex.cbSize = sizeof(WNDCLASSEX);
-	wcex.style = CS_HREDRAW | CS_VREDRAW;
-	wcex.lpfnWndProc = WndProc;
-	wcex.cbClsExtra = 0;
-	wcex.cbWndExtra = 0;
-	wcex.hInstance = hInstance;
-	wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
-	wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-	wcex.lpszMenuName = NULL;
-	wcex.lpszClassName = szWindowClass;
-	wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
-
-	if (!RegisterClassEx(&wcex))
-	{
-		MessageBox(NULL,
-			_T("Call to RegisterClassEx failed!"),
-			szTitle,
-			NULL);
-
-		return;
-	}
-
-	if (IsOnlyInstance(szTitle))
-	{
-		if (!InitInstance())
-		{
-			return;
-		}
 
 		HWND hWnd = CreateWindow(
 			szWindowClass,
@@ -108,6 +74,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam)
 	case WM_LBUTTONDOWN:
 		xPos = GET_X_LPARAM(lparam);
 		yPos = GET_Y_LPARAM(lparam);
+		/*  */
 		sprintf_s(greeting, 260, TEXT("Left mouse button clicked at x:%d, y:%d"), xPos, yPos);
 		InvalidateRect(hWnd, NULL, TRUE);
 		break;
@@ -321,6 +288,14 @@ void GameEngine::ReadCPUSpeed()
 
 bool GameEngine::InitInstance()
 {
+	if (IsOnlyInstance(szTitle))
+	{
+		if (!InitInstance())
+		{
+			return;
+		}
+	}
+
 	cout << "Starting system check..." << endl;
 	bool result = CheckStorage(DISK_SPACE_NEEDED) && CheckMemory(PHYSICAL_MEMORY_NEEDED, VIRTUAL_MEMORY_NEEDED);
 	if (result) { ReadCPUSpeed(); }

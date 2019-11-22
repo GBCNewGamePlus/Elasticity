@@ -19,9 +19,13 @@ private:
 	const DWORDLONG DISK_SPACE_NEEDED = 300 * MB;
 	const DWORDLONG PHYSICAL_MEMORY_NEEDED = 300 * MB;
 	const DWORDLONG VIRTUAL_MEMORY_NEEDED = 300 * MB;
+	HINSTANCE hInstance;
+	HINSTANCE previousInstance;
+	PSTR cmdLine;
+	INT nCmdShow;
 
 public:
-	GameEngine(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLine, INT nCmdShow);
+	GameEngine(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow);
 	~GameEngine();
 	bool InitInstance();
 	bool IsOnlyInstance(LPCTSTR windowName);
