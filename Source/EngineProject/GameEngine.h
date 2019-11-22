@@ -23,9 +23,10 @@ private:
 	HINSTANCE previousInstance;
 	PSTR cmdLine;
 	INT nCmdShow;
+	TCHAR* szTitle;
 
 public:
-	GameEngine(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow);
+	GameEngine(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, TCHAR* _szTitle);
 	~GameEngine();
 	bool InitInstance();
 	bool IsOnlyInstance(LPCTSTR windowName);

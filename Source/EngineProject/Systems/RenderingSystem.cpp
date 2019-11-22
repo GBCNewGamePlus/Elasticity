@@ -38,5 +38,29 @@ namespace System {
 
 			return;
 		}
+		HWND hWnd = CreateWindow(
+			szWindowClass,
+			szTitle,
+			WS_OVERLAPPEDWINDOW,
+			CW_USEDEFAULT, CW_USEDEFAULT,
+			800, 800,
+			NULL,
+			NULL,
+			hInstance,
+			NULL
+		);
+
+		if (!hWnd)
+		{
+			MessageBox(NULL,
+				_T("Call to CreateWindow failed!"),
+				szTitle,
+				NULL);
+
+			return;
+		}
+		ShowWindow(hWnd,nCmdShow);
+		UpdateWindow(hWnd);
+
 	}
 }

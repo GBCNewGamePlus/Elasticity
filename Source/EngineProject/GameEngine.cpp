@@ -11,42 +11,22 @@ using namespace std;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam);
 
-GameEngine::GameEngine(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow)
+GameEngine::GameEngine(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, TCHAR* _szTitle)
 {
-
-		HWND hWnd = CreateWindow(
-			szWindowClass,
-			szTitle,
-			WS_OVERLAPPEDWINDOW,
-			CW_USEDEFAULT, CW_USEDEFAULT,
-			800, 800,
-			NULL,
-			NULL,
-			hInstance,
-			NULL
-		);
-		if (!hWnd)
-		{
-			MessageBox(NULL,
-				_T("Call to CreateWindow failed!"),
-				szTitle,
-				NULL);
-
-			return;
-		}
-		ShowWindow(hWnd,
-			nCmdShow);
-		UpdateWindow(hWnd);
-
+	hInstance = _hInstance;
+	previousInstance = _previousInstance;
+	cmdLine = _cmdLine;
+	nCmdShow = _nCmdShow;
+	szTitle = _szTitle;
+	/*
 		MSG msg;
 		while (GetMessage(&msg, NULL, 0, 0))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-
+		*/
 		return;
-	}
 }
 
 GameEngine::~GameEngine()
