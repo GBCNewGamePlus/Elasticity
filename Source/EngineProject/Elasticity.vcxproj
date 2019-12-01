@@ -118,6 +118,7 @@
     <ClCompile Include="Assets\Scripts\GameKeyboardHandler.cpp" />
     <ClCompile Include="Assets\Scripts\GamePointerHandler.cpp" />
     <ClCompile Include="Base\Actor.cpp" />
+    <ClCompile Include="Base\Dispatcher.cpp" />
     <ClCompile Include="Base\GameCodeApp.cpp" />
     <ClCompile Include="Components\AIComponent\PathfindingComponent.cpp" />
     <ClCompile Include="Components\AudioComponent\AudioComponent.cpp" />
@@ -134,6 +135,7 @@
     <ClCompile Include="Components\ScriptComponent\RayTracingComponent.cpp" />
     <ClCompile Include="Components\ScriptComponent\TextComponent.cpp" />
     <ClCompile Include="Components\TransformComponent\TransformComponent.cpp" />
+    <ClCompile Include="Events\MouseEvent.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Systems\InputSystem.cpp" />
@@ -144,6 +146,8 @@
     <ClInclude Include="Assets\Scripts\GamePointerHandler.h" />
     <ClInclude Include="Base\Actor.h" />
     <ClInclude Include="Base\ActorComponent.h" />
+    <ClInclude Include="Base\Dispatcher.h" />
+    <ClInclude Include="Base\Event.h" />
     <ClInclude Include="Base\GameCodeApp.h" />
     <ClInclude Include="Components\AIComponent\IAIComponent.h" />
     <ClInclude Include="Components\AIComponent\PathfindingComponent.h" />
@@ -173,6 +177,7 @@
     <ClInclude Include="Components\ScriptComponent\TextComponent.h" />
     <ClInclude Include="Components\TransformComponent\ITransformComponent.h" />
     <ClInclude Include="Components\TransformComponent\TransformComponent.h" />
+    <ClInclude Include="Events\MouseEvent.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="Systems\InputSystem.h" />
     <ClInclude Include="Systems\RenderingSystem.h" />

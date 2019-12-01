@@ -1,5 +1,11 @@
 #include "InputSystem.h"
 #include <strsafe.h>
+#include "../Events/MouseEvent.h"
+
+InputSystem::InputSystem()
+{
+
+}
 
 TCHAR greeting[2000000] = _T("Hello, World!");
 LRESULT CALLBACK InputSystem::WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam)
@@ -21,26 +27,28 @@ LRESULT CALLBACK InputSystem::WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM 
 	case WM_LBUTTONDOWN:
 		xPos = GET_X_LPARAM(lparam);
 		yPos = GET_Y_LPARAM(lparam);
-		sprintf_s(greeting, 260, TEXT("Left mouse button clicked at x:%d, y:%d"), xPos, yPos);
+		//sprintf_s(greeting, 260, TEXT("Left mouse button clicked at x:%d, y:%d"), xPos, yPos);
+		//gameEngine->dispatcher.post(MouseEvent(xPos, yPos, true));
 		InvalidateRect(hWnd, NULL, TRUE);
 		break;
 	case WM_RBUTTONDOWN:
 		xPos = GET_X_LPARAM(lparam);
 		yPos = GET_Y_LPARAM(lparam);
-		sprintf_s(greeting, 260, TEXT("Right mouse button clicked at x:%d, y:%d"), xPos, yPos);
+		//sprintf_s(greeting, 260, TEXT("Right mouse button clicked at x:%d, y:%d"), xPos, yPos);
+		//gameEngine->dispatcher.post(MouseEvent(xPos, yPos, false));
 		InvalidateRect(hWnd, NULL, TRUE);
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
 	case WM_KEYDOWN:
-		if ((param >= 'A' && param < 'Z')
+		/*if ((param >= 'A' && param < 'Z')
 			|| (param >= 'a' && param < 'z')
 			|| (param >= '0' && param < '9'))
 			sprintf_s(greeting, 260, TEXT("key pressed :%c"), param);
 		else
 			sprintf_s(greeting, 260, TEXT("key pressed: %d"), param);
-		InvalidateRect(hWnd, NULL, TRUE);
+		InvalidateRect(hWnd, NULL, TRUE);*/
 		break;
 	default:
 		return DefWindowProc(hWnd, msg, param, lparam);

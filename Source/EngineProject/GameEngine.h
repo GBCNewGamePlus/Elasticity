@@ -5,6 +5,7 @@
 #include <tchar.h>
 #include <string>
 #include "Systems/RenderingSystem.h"
+#include "Base/Dispatcher.h"
 
 using namespace std;
 
@@ -37,6 +38,7 @@ public:
 	~GameEngine();
 	bool InitInstance();
 	void Run();
+	Dispatcher dispatcher;
 };
 #endif // __GAME_ENGINE_H__
 

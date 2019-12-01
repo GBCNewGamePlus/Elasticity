@@ -58,6 +58,9 @@
     <Filter Include="Systems">
       <UniqueIdentifier>{c10a477b-3888-4503-bdfc-efe268838985}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{dc228038-581a-4897-8873-3328b9a64c70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -128,6 +131,12 @@
     </ClCompile>
     <ClCompile Include="Systems\RenderingSystem.cpp">
       <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Dispatcher.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\MouseEvent.cpp">
+      <Filter>Events</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +247,15 @@
     </ClInclude>
     <ClInclude Include="Systems\RenderingSystem.h">
       <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Dispatcher.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Event.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\MouseEvent.h">
+      <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

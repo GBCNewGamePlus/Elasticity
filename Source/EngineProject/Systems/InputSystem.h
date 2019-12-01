@@ -5,9 +5,11 @@
 #include <tchar.h>
 #include <Windowsx.h>
 
-static class InputSystem
+class InputSystem
 {
 public:
-	static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam);
+	InputSystem();
+	LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam);
 };
-#endif // __INPUT_SYSTEM_H__
+
+#endif 

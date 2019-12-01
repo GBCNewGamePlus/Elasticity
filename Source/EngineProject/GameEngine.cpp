@@ -227,7 +227,8 @@ bool GameEngine::InitInstance()
 
 void GameEngine::Run()
 {
-	RenderingSystem rs(hInstance, previousInstance, cmdLine, nCmdShow, szTitle);
+	InputSystem inputSystem;
+	RenderingSystem rs(hInstance, previousInstance, cmdLine, nCmdShow, szTitle, inputSystem);
 	MSG msg;
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
