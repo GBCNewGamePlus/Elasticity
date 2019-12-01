@@ -3,9 +3,16 @@
 #define __GAME_ENGINE_H__
 #include <windows.h>
 #include <tchar.h>
+#include <string>
+#include "Systems/RenderingSystem.h"
+
+using namespace std;
+
 class GameEngine
 {
 private:
+	void Print(string message);
+	bool IsOnlyInstance(LPCTSTR windowName);
 	bool CheckStorage(const DWORDLONG diskSpaceNeeded);
 	bool CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG virtualRAMNeeded);
 	void ReadCPUSpeed();
@@ -23,13 +30,13 @@ private:
 	HINSTANCE previousInstance;
 	PSTR cmdLine;
 	INT nCmdShow;
-	TCHAR* szTitle;
+	string szTitle;
 
 public:
-	GameEngine(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, TCHAR* _szTitle);
+	GameEngine(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, string _szTitle);
 	~GameEngine();
 	bool InitInstance();
-	bool IsOnlyInstance(LPCTSTR windowName);
+	void Run();
 };
 #endif // __GAME_ENGINE_H__
 

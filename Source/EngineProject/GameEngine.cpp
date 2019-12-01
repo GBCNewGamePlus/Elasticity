@@ -5,81 +5,29 @@
 #include <intrin.h> // This is for CPU information
 #include <strsafe.h>
 #include <tchar.h>
-#include <Windowsx.h>
+#include <string>
 
 using namespace std;
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam);
-
-GameEngine::GameEngine(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, TCHAR* _szTitle)
+GameEngine::GameEngine(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, string _szTitle)
 {
 	hInstance = _hInstance;
 	previousInstance = _previousInstance;
 	cmdLine = _cmdLine;
 	nCmdShow = _nCmdShow;
 	szTitle = _szTitle;
-	/*
-		MSG msg;
-		while (GetMessage(&msg, NULL, 0, 0))
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
-		*/
-		return;
 }
 
 GameEngine::~GameEngine()
 {
 }
 
-TCHAR greeting[2000000] = _T("Hello, World!");
-
-LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam)
+void GameEngine::Print(string message)
 {
-	PAINTSTRUCT ps;
-	HDC hdc;
-	int xPos = 0;
-	int yPos = 0;
-
-	switch (msg)
-	{
-	case WM_PAINT:
-		hdc = BeginPaint(hWnd, &ps);
-		TextOut(hdc,
-			5, 10,
-			greeting, _tcslen(greeting));
-		EndPaint(hWnd, &ps);
-		break;
-	case WM_LBUTTONDOWN:
-		xPos = GET_X_LPARAM(lparam);
-		yPos = GET_Y_LPARAM(lparam);
-		/*  */
-		sprintf_s(greeting, 260, TEXT("Left mouse button clicked at x:%d, y:%d"), xPos, yPos);
-		InvalidateRect(hWnd, NULL, TRUE);
-		break;
-	case WM_RBUTTONDOWN:
-		xPos = GET_X_LPARAM(lparam);
-		yPos = GET_Y_LPARAM(lparam);
-		sprintf_s(greeting, 260, TEXT("Right mouse button clicked at x:%d, y:%d"), xPos, yPos);
-		InvalidateRect(hWnd, NULL, TRUE);
-		break;
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		break;
-	case WM_KEYDOWN:
-		if ((param >= 'A' && param < 'Z')
-			|| (param >= 'a' && param < 'z')
-			|| (param >= '0' && param < '9'))
-			sprintf_s(greeting, 260, TEXT("key pressed :%c"), param);
-		else
-			sprintf_s(greeting, 260, TEXT("key pressed: %d"), param);
-		InvalidateRect(hWnd, NULL, TRUE);
-		break;
-	default:
-		return DefWindowProc(hWnd, msg, param, lparam);
-		break;
-	}
+	message += "\n";
+	char buf[1000];
+	sprintf_s(buf, message.c_str());
+	OutputDebugStringA(buf);
 }
 
 bool GameEngine::IsOnlyInstance(LPCTSTR gameTitle)
@@ -97,7 +45,7 @@ bool GameEngine::IsOnlyInstance(LPCTSTR gameTitle)
 			return false;
 		}
 	}
-	MessageBox(NULL, _T("Multiple Instances NOT Detected!"), _T("Success"), NULL);
+	Print("Multiple Instances NOT Detected!");
 	return true;
 }
 
@@ -207,13 +155,14 @@ bool GameEngine::CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG 
 
 void GameEngine::ReadCPUSpeed()
 {
-	cout << "Checking your hardware..." << endl;
+	Print("Checking your hardware...");
 	int CPUInfo[4] = { -1 };
 	unsigned   nExIds, i = 0;
 	char CPUBrandString[0x40];
 	// Get the information associated with each extended ID.
 	__cpuid(CPUInfo, 0x80000000);
 	nExIds = CPUInfo[0];
+
 	for (i = 0x80000000; i <= nExIds; ++i)
 	{
 		__cpuid(CPUInfo, i);
@@ -225,60 +174,64 @@ void GameEngine::ReadCPUSpeed()
 		else if (i == 0x80000004)
 			memcpy(CPUBrandString + 32, CPUInfo, sizeof(CPUInfo));
 	}
-	//string includes manufacturer, model and clockspeed
-	cout << "" << CPUBrandString << endl;
-	TCHAR cpuType[260] = _T("");
-	sprintf_s(cpuType, 260, TEXT("Your CPU Type is : %s \n"), CPUBrandString);
+
+	string cpuType = "Your CPU Type is: ";
+	cpuType += CPUBrandString;
+	cpuType += "\nNumber of Cores: ";
 
 	SYSTEM_INFO sysInfo;
 	GetSystemInfo(&sysInfo);
-	TCHAR cores[260] = _T("");
-	sprintf_s(cores, 260, TEXT("Number of Cores: %lu \n"), sysInfo.dwNumberOfProcessors);
+
+	char convertBuffer[32];
+	wsprintf(convertBuffer, "%d", sysInfo.dwNumberOfProcessors);
+	cpuType += convertBuffer;
 
 	DWORD BufSize = sizeof(DWORD);
 	DWORD dwMHz = 0;
 	DWORD type = REG_DWORD;
 	HKEY hKey;
 
-	long lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0,
-		KEY_READ,
-		&hKey);
-
-	TCHAR speed[260] = _T("");
+	long lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
 	if (lError == ERROR_SUCCESS)
 	{
-		RegQueryValueEx(hKey, "~MHz",
-			NULL,
-			&type,
-			(LPBYTE)&dwMHz, &BufSize);
-
-		sprintf_s(speed, 260, TEXT("Its speed is: %lu MHz \n"), dwMHz);
+		RegQueryValueEx(hKey, "~MHz", NULL,&type, (LPBYTE)&dwMHz, &BufSize);
+		cpuType += "\nIts speed is: ";
+		wsprintf(convertBuffer, "%d", dwMHz);
+		cpuType += convertBuffer;
+		cpuType += " MHz\n";
 	}
 	else
 	{
-		cout << "Unable to find this information - registry probably corrupted..." << endl;
+		Print("Unable to find this information - registry probably corrupted...");
 	}
-	TCHAR final[260] = _T("");
-	snprintf(final, 260, "%s %s %s", cpuType, cores, speed);
-
-	MessageBox(NULL, final, _T("Information"), NULL);
-
-
+	Print(cpuType);
 }
 
 bool GameEngine::InitInstance()
 {
-	if (IsOnlyInstance(szTitle))
+	if (IsOnlyInstance(szTitle.c_str()))
 	{
-		if (!InitInstance())
-		{
-			return;
-		}
+		Print("Starting system check...");
+		bool result = CheckStorage(DISK_SPACE_NEEDED) && CheckMemory(PHYSICAL_MEMORY_NEEDED, VIRTUAL_MEMORY_NEEDED);
+		if (result) { ReadCPUSpeed(); }
+		Print("Finished system check...");
+		return result;
+	}
+	else
+	{
+		return false;
 	}
 
-	cout << "Starting system check..." << endl;
-	bool result = CheckStorage(DISK_SPACE_NEEDED) && CheckMemory(PHYSICAL_MEMORY_NEEDED, VIRTUAL_MEMORY_NEEDED);
-	if (result) { ReadCPUSpeed(); }
-	cout << "Finished system check..." << endl;
-	return result;
+	
+}
+
+void GameEngine::Run()
+{
+	RenderingSystem rs(hInstance, previousInstance, cmdLine, nCmdShow, szTitle);
+	MSG msg;
+	while (GetMessage(&msg, NULL, 0, 0))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
 }

@@ -9,6 +9,7 @@
 #include <tchar.h>
 #include "GameEngine.h"
 
+
 # define GCC_NEW new(NORMAL_BLOCK,FILE, __LINE_)
 using namespace std;
 
@@ -16,7 +17,11 @@ using namespace std;
 // Use this main to test multiple instance detection.
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLine, INT nCmdShow)
 {
-	GameEngine engine( hInstance,  previousInstance,  cmdLine,  nCmdShow);
+	GameEngine engine( hInstance,  previousInstance,  cmdLine,  nCmdShow, "Game Title");
+	if (engine.InitInstance())
+	{
+		engine.Run();
+	}
 	/*
 	bool runs = engine.initialize(); -> systems that you have in the engine
 	engine.loadActor(paddleOneXml);
