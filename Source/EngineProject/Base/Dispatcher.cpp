@@ -18,7 +18,7 @@ void Dispatcher::Subscribe(const EventType descriptor, SlotType&& slot)
 
 void Dispatcher::Post(const Event& event)
 {
-	auto type = event.descriptor;
+	EventType type = event.descriptor;
 
 	// Ignore events for which we do not have an observer (yet).
 	if (observers.find(type) == observers.end())

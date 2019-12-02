@@ -7,12 +7,38 @@
 #include <basetsd.h> 
 #include <winnt.h>
 #include <tchar.h>
-#include "GameEngine.h"
 
+#include "GameEngine.h"
+#include "Base/Dispatcher.h"
+#include "Base/Event.h"
+#include "Events/EMouseEvent.h"
 
 # define GCC_NEW new(NORMAL_BLOCK,FILE, __LINE_)
-using namespace std;
 
+using namespace std;
+using namespace std::placeholders;
+
+class ClassObserver
+{
+public:
+	void handle(const Event& e)
+	{
+		if (e.descriptor == EventType::MouseEvent)
+		{
+			char number[10];
+			const EMouseEvent& myMouseEvent = static_cast<const EMouseEvent&>(e);
+			string printing = "Mouse Clicked on (";
+			snprintf(number, sizeof(number), "%d", myMouseEvent.x);
+			printing += number;
+			printing += ",";
+			snprintf(number, sizeof(number), "%d", myMouseEvent.y);
+			printing += number;
+			printing += ")";
+			printing = myMouseEvent.leftClick ? "Left " + printing : "Right " + printing;
+			GameEngine::GetInstance()->PrintToWindow(printing);
+		}
+	}
+};
 
 // Use this main to test multiple instance detection.
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLine, INT nCmdShow)
@@ -20,6 +46,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLi
 	GameEngine* engine = GameEngine::GetInstance();
 	if (engine->InitInstance(hInstance, previousInstance, cmdLine, nCmdShow, "Game Title"))
 	{
+		ClassObserver co;
+		Dispatcher::GetInstance()->Subscribe(EventType::MouseEvent, std::bind(&ClassObserver::handle, co, _1));
 		engine->Run();
 	}
 	/*

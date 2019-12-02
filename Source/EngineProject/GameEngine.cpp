@@ -26,7 +26,10 @@ GameEngine::GameEngine()
 GameEngine::~GameEngine()
 {
 }
-
+void GameEngine::PrintToWindow(string message) 
+{
+	InputSystem::ChangeMessage(message);
+}
 void GameEngine::Print(string message)
 {
 	message += "\n";

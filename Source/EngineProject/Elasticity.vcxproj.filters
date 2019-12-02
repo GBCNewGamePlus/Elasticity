@@ -135,7 +135,10 @@
     <ClCompile Include="Base\Dispatcher.cpp">
       <Filter>Base</Filter>
     </ClCompile>
-    <ClCompile Include="Events\MouseEvent.cpp">
+    <ClCompile Include="Events\EMouseEvent.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EKeyboardEvent.cpp">
       <Filter>Events</Filter>
     </ClCompile>
   </ItemGroup>
@@ -254,7 +257,10 @@
     <ClInclude Include="Base\Event.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="Events\MouseEvent.h">
+    <ClInclude Include="Events\EMouseEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EKeyboardEvent.h">
       <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>

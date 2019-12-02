@@ -135,7 +135,8 @@
     <ClCompile Include="Components\ScriptComponent\RayTracingComponent.cpp" />
     <ClCompile Include="Components\ScriptComponent\TextComponent.cpp" />
     <ClCompile Include="Components\TransformComponent\TransformComponent.cpp" />
-    <ClCompile Include="Events\MouseEvent.cpp" />
+    <ClCompile Include="Events\EKeyboardEvent.cpp" />
+    <ClCompile Include="Events\EMouseEvent.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Systems\InputSystem.cpp" />
@@ -177,7 +178,8 @@
     <ClInclude Include="Components\ScriptComponent\TextComponent.h" />
     <ClInclude Include="Components\TransformComponent\ITransformComponent.h" />
     <ClInclude Include="Components\TransformComponent\TransformComponent.h" />
-    <ClInclude Include="Events\MouseEvent.h" />
+    <ClInclude Include="Events\EKeyboardEvent.h" />
+    <ClInclude Include="Events\EMouseEvent.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="Systems\InputSystem.h" />
     <ClInclude Include="Systems\RenderingSystem.h" />

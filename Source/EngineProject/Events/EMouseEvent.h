@@ -1,5 +1,5 @@
-#ifndef __MOUSE_EVENT_H__
-#define __MOUSE_EVENT_H__
+#ifndef __EMOUSE_EVENT_H__
+#define __EMOUSE_EVENT_H__
 
 #include "../Base/Event.h"
 
@@ -11,7 +11,7 @@ public:
 	bool leftClick;
 	EMouseEvent(int _x, int _y, bool _leftClick);
 	~EMouseEvent();
-	EventType descriptor;
+	//EventType descriptor;
 };
 
 #endif

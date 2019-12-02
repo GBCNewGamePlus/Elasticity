@@ -11,7 +11,6 @@ using namespace std;
 class GameEngine
 {
 private:
-	void Print(string message);
 	bool IsOnlyInstance(LPCTSTR windowName);
 	bool CheckStorage(const DWORDLONG diskSpaceNeeded);
 	bool CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG virtualRAMNeeded);
@@ -38,6 +37,8 @@ public:
 	static GameEngine* GetInstance();
 	bool InitInstance(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, string _szTitle);
 	void Run();
+	void Print(string message);
+	void PrintToWindow(string message);
 };
 #endif // __GAME_ENGINE_H__
 

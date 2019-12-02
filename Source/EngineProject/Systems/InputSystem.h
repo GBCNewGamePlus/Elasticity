@@ -5,6 +5,9 @@
 #include <tchar.h>
 #include <Windowsx.h>
 #include "../GameEngine.h"
+#include <string>
+
+using namespace std;
 
 class InputSystem
 {
@@ -12,6 +15,7 @@ private:
 	static TCHAR WindowText[2000];
 public:
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam);
+	static void ChangeMessage(string message);
 };
 
 #endif 
