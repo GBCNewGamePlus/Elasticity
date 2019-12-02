@@ -9,13 +9,18 @@
 
 using namespace std;
 
-GameEngine::GameEngine(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, string _szTitle)
+GameEngine* GameEngine::instance = 0;
+GameEngine* GameEngine::GetInstance()
 {
-	hInstance = _hInstance;
-	previousInstance = _previousInstance;
-	cmdLine = _cmdLine;
-	nCmdShow = _nCmdShow;
-	szTitle = _szTitle;
+	if (!instance)
+	{
+		instance = new GameEngine();
+	}
+	return instance;
+}
+
+GameEngine::GameEngine()
+{
 }
 
 GameEngine::~GameEngine()
@@ -207,8 +212,14 @@ void GameEngine::ReadCPUSpeed()
 	Print(cpuType);
 }
 
-bool GameEngine::InitInstance()
+bool GameEngine::InitInstance(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, string _szTitle)
 {
+	hInstance = _hInstance;
+	previousInstance = _previousInstance;
+	cmdLine = _cmdLine;
+	nCmdShow = _nCmdShow;
+	szTitle = _szTitle;
+
 	if (IsOnlyInstance(szTitle.c_str()))
 	{
 		Print("Starting system check...");

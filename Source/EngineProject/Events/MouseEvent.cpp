@@ -1,6 +1,6 @@
 #include "MouseEvent.h"
 
-MouseEvent::MouseEvent(int _x, int _y, bool _leftClick)
+EMouseEvent::EMouseEvent(int _x, int _y, bool _leftClick)
 {
 	descriptor = EventType::MouseEvent;
 	x = _x;
@@ -8,6 +8,6 @@ MouseEvent::MouseEvent(int _x, int _y, bool _leftClick)
 	leftClick = _leftClick;
 }
 
-MouseEvent::~MouseEvent()
+EMouseEvent::~EMouseEvent()
 {
 }

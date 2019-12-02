@@ -1,20 +1,31 @@
 #include "Dispatcher.h"
 
-void Dispatcher::subscribe(const EventType descriptor, SlotType&& slot)
+Dispatcher* Dispatcher::instance=0;
+
+Dispatcher::Dispatcher() {}
+
+Dispatcher* Dispatcher::GetInstance()
 {
-	_observers[descriptor].push_back(slot);
+	if (!instance)
+		instance = new Dispatcher();
+	return instance;
 }
 
-void Dispatcher::post(const Event& event)
+void Dispatcher::Subscribe(const EventType descriptor, SlotType&& slot)
+{
+	observers[descriptor].push_back(slot);
+}
+
+void Dispatcher::Post(const Event& event)
 {
 	auto type = event.descriptor;
 
 	// Ignore events for which we do not have an observer (yet).
-	if (_observers.find(type) == _observers.end())
+	if (observers.find(type) == observers.end())
 		return;
 
-	auto&& observers = _observers.at(type);
+	auto&& listOfFunctions = observers.at(type);
 
-	for (auto&& observer : observers)
-		observer(event);
+	for (auto&& theFunction : listOfFunctions)
+		theFunction(event);
 }

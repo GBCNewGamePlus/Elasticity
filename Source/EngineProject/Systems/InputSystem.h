@@ -8,6 +8,8 @@
 
 class InputSystem
 {
+private:
+	static TCHAR WindowText[2000];
 public:
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam);
 };

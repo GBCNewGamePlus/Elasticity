@@ -17,10 +17,10 @@ using namespace std;
 // Use this main to test multiple instance detection.
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLine, INT nCmdShow)
 {
-	GameEngine engine( hInstance,  previousInstance,  cmdLine,  nCmdShow, "Game Title");
-	if (engine.InitInstance())
+	GameEngine* engine = GameEngine::GetInstance();
+	if (engine->InitInstance(hInstance, previousInstance, cmdLine, nCmdShow, "Game Title"))
 	{
-		engine.Run();
+		engine->Run();
 	}
 	/*
 	bool runs = engine.initialize(); -> systems that you have in the engine

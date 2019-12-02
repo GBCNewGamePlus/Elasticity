@@ -5,7 +5,6 @@
 #include <tchar.h>
 #include <string>
 #include "Systems/RenderingSystem.h"
-#include "Base/Dispatcher.h"
 
 using namespace std;
 
@@ -32,13 +31,13 @@ private:
 	PSTR cmdLine;
 	INT nCmdShow;
 	string szTitle;
-
-public:
-	GameEngine(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, string _szTitle);
+	GameEngine();
 	~GameEngine();
-	bool InitInstance();
+	static GameEngine* instance;
+public:
+	static GameEngine* GetInstance();
+	bool InitInstance(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, string _szTitle);
 	void Run();
-	Dispatcher dispatcher;
 };
 #endif // __GAME_ENGINE_H__
 

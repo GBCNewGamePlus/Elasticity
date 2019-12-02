@@ -3,16 +3,15 @@
 
 #include "../Base/Event.h"
 
-class MouseEvent : public Event
+class EMouseEvent : public Event
 {
 public:
 	int x;
 	int y;
 	bool leftClick;
-	MouseEvent(int _x, int _y, bool _leftClick);
-	~MouseEvent();
+	EMouseEvent(int _x, int _y, bool _leftClick);
+	~EMouseEvent();
 	EventType descriptor;
-	
 };
 
 #endif

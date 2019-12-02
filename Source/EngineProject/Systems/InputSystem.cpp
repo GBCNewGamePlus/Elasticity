@@ -1,10 +1,13 @@
 #include "InputSystem.h"
 #include <strsafe.h>
 #include "../Events/MouseEvent.h"
+#include "../Base/Dispatcher.h"
 
-TCHAR greeting[2000000] = _T("Hello, World!");
+TCHAR InputSystem::WindowText[2000];
 LRESULT CALLBACK InputSystem::WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam)
 {
+	sprintf_s(WindowText, 260, TEXT("Hello, World!"), param);
+
 	PAINTSTRUCT ps;
 	HDC hdc;
 	int xPos = 0;
@@ -16,21 +19,19 @@ LRESULT CALLBACK InputSystem::WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM 
 		hdc = BeginPaint(hWnd, &ps);
 		TextOut(hdc,
 			5, 10,
-			greeting, _tcslen(greeting));
+			WindowText, _tcslen(WindowText));
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_LBUTTONDOWN:
 		xPos = GET_X_LPARAM(lparam);
 		yPos = GET_Y_LPARAM(lparam);
-		//sprintf_s(greeting, 260, TEXT("Left mouse button clicked at x:%d, y:%d"), xPos, yPos);
-		//gameEngine->dispatcher.post(MouseEvent(xPos, yPos, true));
+		Dispatcher::GetInstance()->Post(EMouseEvent(xPos, yPos, false));
 		InvalidateRect(hWnd, NULL, TRUE);
 		break;
 	case WM_RBUTTONDOWN:
 		xPos = GET_X_LPARAM(lparam);
 		yPos = GET_Y_LPARAM(lparam);
-		//sprintf_s(greeting, 260, TEXT("Right mouse button clicked at x:%d, y:%d"), xPos, yPos);
-		//gameEngine->dispatcher.post(MouseEvent(xPos, yPos, false));
+		Dispatcher::GetInstance()->Post(EMouseEvent(xPos, yPos, false));
 		InvalidateRect(hWnd, NULL, TRUE);
 		break;
 	case WM_DESTROY:

@@ -10,11 +10,13 @@ class Dispatcher
 {
 public:
 	using SlotType = std::function< void(const Event&) >;
-	void subscribe(const EventType descriptor, SlotType&& slot);
-	void post(const Event& event);
-
+	void Subscribe(const EventType descriptor, SlotType&& slot);
+	void Post(const Event& event);
+	static Dispatcher* GetInstance();
 private:
-	std::map<EventType, std::vector<SlotType>> _observers;
+	std::map<EventType, std::vector<SlotType>> observers;
+	static Dispatcher* instance;
+	Dispatcher();
 };
 
 #endif
