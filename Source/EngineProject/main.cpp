@@ -12,11 +12,16 @@
 #include "Base/Dispatcher.h"
 #include "Base/Event.h"
 #include "Events/EMouseEvent.h"
+#include "LuaPlus.h"
+
+//#pragma comment(lib, "luaplus51-1201.lib")
+
 
 # define GCC_NEW new(NORMAL_BLOCK,FILE, __LINE_)
 
 using namespace std;
 using namespace std::placeholders;
+using namespace LuaPlus;
 
 class ClassObserver
 {
@@ -43,6 +48,20 @@ public:
 // Use this main to test multiple instance detection.
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLine, INT nCmdShow)
 {
+	/*
+	*/
+	LuaState* pLuaState = LuaState::Create();
+
+	pLuaState->DoString("birthdayList={John='Superman',Mary='Batman'}");
+	LuaObject table = pLuaState->GetGlobals().GetByName("birthdayList");
+	// loop through the table, printing out the pair
+	for (LuaTableIterator it(table); it; it.Next()) {
+		LuaObject key = it.GetKey();
+		LuaObject value = it.GetValue();
+		// do whatever you want with the objects...
+	}
+
+
 	GameEngine* engine = GameEngine::GetInstance();
 	if (engine->InitInstance(hInstance, previousInstance, cmdLine, nCmdShow, "Game Title"))
 	{
@@ -50,6 +69,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLi
 		Dispatcher::GetInstance()->Subscribe(EventType::MouseEvent, std::bind(&ClassObserver::handle, co, _1));
 		engine->Run();
 	}
+	LuaState::Destroy(pLuaState);
+	pLuaState = NULL;
 	/*
 	bool runs = engine.initialize(); -> systems that you have in the engine
 	engine.loadActor(paddleOneXml);
