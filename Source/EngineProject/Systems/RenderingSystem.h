@@ -17,10 +17,9 @@ private:
 	PSTR cmdLine; 
 	INT nCmdShow;
 	string szTitle;
-	InputSystem inputSystem;
 
 public:
-	RenderingSystem(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, string _szTitle, InputSystem& _is);
+	RenderingSystem(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, string _szTitle);
 	~RenderingSystem();
 	void WindowCreate();
 };

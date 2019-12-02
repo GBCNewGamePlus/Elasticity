@@ -4,12 +4,12 @@
 #include <windows.h>
 #include <tchar.h>
 #include <Windowsx.h>
+#include "../GameEngine.h"
 
 class InputSystem
 {
 public:
-	InputSystem();
-	LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam);
+	static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam);
 };
 
 #endif 

@@ -14,7 +14,7 @@ public:
 	void post(const Event& event);
 
 private:
-	std::map< EventType, std::vector<SlotType> > _observers;
+	std::map<EventType, std::vector<SlotType>> _observers;
 };
 
 #endif

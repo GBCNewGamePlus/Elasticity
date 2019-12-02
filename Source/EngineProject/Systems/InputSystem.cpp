@@ -2,11 +2,6 @@
 #include <strsafe.h>
 #include "../Events/MouseEvent.h"
 
-InputSystem::InputSystem()
-{
-
-}
-
 TCHAR greeting[2000000] = _T("Hello, World!");
 LRESULT CALLBACK InputSystem::WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam)
 {

@@ -1,13 +1,12 @@
 #include "RenderingSystem.h"
 
-RenderingSystem::RenderingSystem(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, string _szTitle, InputSystem& _is)
+RenderingSystem::RenderingSystem(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, string _szTitle)
 {
 	hInstance = _hInstance;
 	previousInstance = _previousInstance;
 	cmdLine = _cmdLine;
 	nCmdShow = _nCmdShow;
 	szTitle = _szTitle;
-	inputSystem = _is;
 	WindowCreate();
 }
 
@@ -19,7 +18,7 @@ void RenderingSystem::WindowCreate()
 	WNDCLASSEX wcex;
 	wcex.cbSize = sizeof(WNDCLASSEX);
 	wcex.style = CS_HREDRAW | CS_VREDRAW;
-	wcex.lpfnWndProc = inputSystem.WndProc;
+	wcex.lpfnWndProc = InputSystem::WndProc;
 	wcex.cbClsExtra = 0;
 	wcex.cbWndExtra = 0;
 	wcex.hInstance = hInstance;
