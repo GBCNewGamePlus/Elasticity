@@ -16,15 +16,20 @@ void Dispatcher::Subscribe(const EventType descriptor, SlotType&& slot)
 	observers[descriptor].push_back(slot);
 }
 
+void Dispatcher::Subscribe(const EventType descriptor, void(*slot)(const Event& e))
+{
+
+	observers2[descriptor].push_back(slot);
+}
 void Dispatcher::Post(const Event& event)
 {
 	EventType type = event.descriptor;
 
 	// Ignore events for which we do not have an observer (yet).
-	if (observers.find(type) == observers.end())
+	if (observers2.find(type) == observers2.end())
 		return;
 
-	auto&& listOfFunctions = observers.at(type);
+	auto&& listOfFunctions = observers2.at(type);
 
 	for (auto&& theFunction : listOfFunctions)
 		theFunction(event);

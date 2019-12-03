@@ -39,12 +39,10 @@ LRESULT CALLBACK InputSystem::WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM 
 	case WM_KEYDOWN:
 		if ((param >= 'A' && param < 'Z') || (param >= 'a' && param < 'z') || (param >= '0' && param < '9'))
 		{
-			//sprintf_s(greeting, 260, TEXT("key pressed :%c"), param);
 			Dispatcher::GetInstance()->Post(EKeyboardEvent((char)param));
 		}
 		else
 		{
-			//sprintf_s(greeting, 260, TEXT("key pressed: %d"), param);
 			Dispatcher::GetInstance()->Post(EKeyboardEvent((int)param));
 		}
 		InvalidateRect(hWnd, NULL, TRUE);
@@ -54,6 +52,7 @@ LRESULT CALLBACK InputSystem::WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM 
 		break;
 	}
 }
+
 void InputSystem::ChangeMessage(string message) 
 {
 	sprintf_s(WindowText, 2000, message.c_str());
