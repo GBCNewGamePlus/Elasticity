@@ -11,7 +11,6 @@ public:
 	bool leftClick;
 	EMouseEvent(int _x, int _y, bool _leftClick);
 	~EMouseEvent();
-	//EventType descriptor;
 };
 
 #endif

@@ -1,11 +1,12 @@
 #include "InputSystem.h"
 #include <strsafe.h>
 #include "../Events/EMouseEvent.h"
+#include "../Events/EKeyboardEvent.h"
 #include "../Base/Dispatcher.h"
 
 using namespace std;
-
 TCHAR InputSystem::WindowText[2000];
+
 LRESULT CALLBACK InputSystem::WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam)
 {
 	PAINTSTRUCT ps;
@@ -17,9 +18,7 @@ LRESULT CALLBACK InputSystem::WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM 
 	{
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
-		TextOut(hdc,
-			5, 10,
-			WindowText, _tcslen(WindowText));
+		TextOut(hdc, 5, 10, WindowText, _tcslen(WindowText));
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_LBUTTONDOWN:
@@ -38,13 +37,16 @@ LRESULT CALLBACK InputSystem::WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM 
 		PostQuitMessage(0);
 		break;
 	case WM_KEYDOWN:
-
-		/*if ((param >= 'A' && param < 'Z')
-			|| (param >= 'a' && param < 'z')
-			|| (param >= '0' && param < '9'))
-			sprintf_s(greeting, 260, TEXT("key pressed :%c"), param);
+		if ((param >= 'A' && param < 'Z') || (param >= 'a' && param < 'z') || (param >= '0' && param < '9'))
+		{
+			//sprintf_s(greeting, 260, TEXT("key pressed :%c"), param);
+			Dispatcher::GetInstance()->Post(EKeyboardEvent((char)param));
+		}
 		else
-			sprintf_s(greeting, 260, TEXT("key pressed: %d"), param);*/
+		{
+			//sprintf_s(greeting, 260, TEXT("key pressed: %d"), param);
+			Dispatcher::GetInstance()->Post(EKeyboardEvent((int)param));
+		}
 		InvalidateRect(hWnd, NULL, TRUE);
 		break;
 	default:
@@ -52,9 +54,9 @@ LRESULT CALLBACK InputSystem::WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM 
 		break;
 	}
 }
-void InputSystem::ChangeMessage(string message) {
+void InputSystem::ChangeMessage(string message) 
+{
 	sprintf_s(WindowText, 2000, message.c_str());
-
 }
 
 
