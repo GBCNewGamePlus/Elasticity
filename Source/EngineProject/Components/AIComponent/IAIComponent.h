@@ -4,7 +4,7 @@
 #include "../../Base/ActorComponent.h" 
 
 namespace Component{
-	class IAIComponent : public Base::ActorComponent{
+	class IAIComponent : public ActorComponent{
 	};
 }
 

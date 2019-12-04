@@ -6,9 +6,11 @@
 
 using namespace std;
 TCHAR InputSystem::WindowText[2000];
+HWND InputSystem::hwnd;
 
 LRESULT CALLBACK InputSystem::WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam)
 {
+	hwnd = hWnd;
 	PAINTSTRUCT ps;
 	HDC hdc;
 	int xPos = 0;
@@ -56,6 +58,7 @@ LRESULT CALLBACK InputSystem::WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM 
 void InputSystem::ChangeMessage(string message) 
 {
 	sprintf_s(WindowText, 2000, message.c_str());
+	InvalidateRect(hwnd, NULL, TRUE);
 }
 
 

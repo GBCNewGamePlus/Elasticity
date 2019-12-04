@@ -4,7 +4,7 @@
 #include "../../Base/ActorComponent.h" 
 
 namespace Component {
-	class ITransformComponent : public Base::ActorComponent{
+	class ITransformComponent : public ActorComponent{
 	};
 }
 

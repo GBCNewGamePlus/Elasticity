@@ -13,6 +13,7 @@ class InputSystem
 {
 private:
 	static TCHAR WindowText[2000];
+	static HWND hwnd;
 public:
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM param, LPARAM lparam);
 	static void ChangeMessage(string message);

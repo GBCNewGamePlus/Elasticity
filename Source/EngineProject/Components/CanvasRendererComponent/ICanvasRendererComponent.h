@@ -4,7 +4,7 @@
 #include "../../Base/ActorComponent.h" 
 
 namespace Component {
-	class ICanvasRendererComponent : public Base::ActorComponent{
+	class ICanvasRendererComponent : public ActorComponent{
 	};
 }
 

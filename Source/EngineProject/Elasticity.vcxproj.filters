@@ -81,21 +81,6 @@
     <ClCompile Include="Components\PhysicsComponent\BoxColliderComponent.cpp">
       <Filter>Components\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Components\ScriptComponent\RayTracingComponent.cpp">
-      <Filter>Components\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\ScriptComponent\ImageComponent.cpp">
-      <Filter>Components\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\ScriptComponent\TextComponent.cpp">
-      <Filter>Components\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\ScriptComponent\EventSystemComponent.cpp">
-      <Filter>Components\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\ScriptComponent\InputComponent.cpp">
-      <Filter>Components\Script</Filter>
-    </ClCompile>
     <ClCompile Include="Components\AIComponent\PathfindingComponent.cpp">
       <Filter>Components\AI</Filter>
     </ClCompile>
@@ -141,6 +126,12 @@
     <ClCompile Include="Events\EKeyboardEvent.cpp">
       <Filter>Events</Filter>
     </ClCompile>
+    <ClCompile Include="Components\ScriptComponent\ScriptComponent.cpp">
+      <Filter>Components\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\ScriptSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\GameCodeApp.h">
@@ -176,9 +167,6 @@
     <ClInclude Include="Components\MeshRendererComponent\IMeshRendererComponent.h">
       <Filter>Components\MeshRenderer</Filter>
     </ClInclude>
-    <ClInclude Include="Components\ScriptComponent\IScriptComponent.h">
-      <Filter>Components\Script</Filter>
-    </ClInclude>
     <ClInclude Include="Components\PhysicsComponent\IPhysicsComponent.h">
       <Filter>Components\Physics</Filter>
     </ClInclude>
@@ -193,21 +181,6 @@
     </ClInclude>
     <ClInclude Include="Components\TransformComponent\ITransformComponent.h">
       <Filter>Components\Transform</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\ScriptComponent\RayTracingComponent.h">
-      <Filter>Components\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\ScriptComponent\ImageComponent.h">
-      <Filter>Components\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\ScriptComponent\TextComponent.h">
-      <Filter>Components\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\ScriptComponent\EventSystemComponent.h">
-      <Filter>Components\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\ScriptComponent\InputComponent.h">
-      <Filter>Components\Script</Filter>
     </ClInclude>
     <ClInclude Include="Components\AIComponent\PathfindingComponent.h">
       <Filter>Components\AI</Filter>
@@ -229,12 +202,6 @@
     </ClInclude>
     <ClInclude Include="Components\LightComponent\LightComponent.h">
       <Filter>Components\Light</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\ScriptComponent\IKeyboardHandler.h">
-      <Filter>Components\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\ScriptComponent\IPointerHandler.h">
-      <Filter>Components\Script</Filter>
     </ClInclude>
     <ClInclude Include="Assets\Scripts\GameKeyboardHandler.h">
       <Filter>GameScripts</Filter>
@@ -262,6 +229,12 @@
     </ClInclude>
     <ClInclude Include="Events\EKeyboardEvent.h">
       <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ScriptComponent\ScriptComponent.h">
+      <Filter>Components\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\ScriptSystem.h">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

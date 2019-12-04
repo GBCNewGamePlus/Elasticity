@@ -6,6 +6,7 @@
 #include <strsafe.h>
 #include <tchar.h>
 #include <string>
+#include "Systems/ScriptSystem.h"
 
 using namespace std;
 
@@ -244,10 +245,17 @@ bool GameEngine::InitInstance(HINSTANCE _hInstance, HINSTANCE _previousInstance,
 void GameEngine::Run()
 {
 	RenderingSystem rs(hInstance, previousInstance, cmdLine, nCmdShow, szTitle);
+	ScriptSystem ss(&actors);
 	MSG msg;
+	ss.Run();
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
+}
+
+void GameEngine::AddActor(Actor* _actor)
+{
+	actors.push_back(_actor);
 }
