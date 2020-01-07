@@ -1,3 +1,4 @@
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include "windows.h"
 #include <stdio.h>
@@ -55,6 +56,26 @@ void MyKeyboardFunction(const Event& e)
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLine, INT nCmdShow)
 {
+	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+	sf::CircleShape shape(100.f);
+	shape.setFillColor(sf::Color::Green);
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		window.draw(shape);
+		window.display();
+	}
+	return 0;
+	/*
+
 	GameEngine* engine = GameEngine::GetInstance();
 	if (engine->InitInstance(hInstance, previousInstance, cmdLine, nCmdShow, "Game Title"))
 	{
@@ -66,16 +87,6 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLi
 		engine->AddActor(exampleActor);
 		engine->Run();
 	}
-	
-	/*
-	bool runs = engine.initialize(); -> systems that you have in the engine
-	engine.loadActor(paddleOneXml);
-	auto levels = engine.loadLevels();
-	auto world = engine.loadWorld(levelXML);
-	engine.loadActors(world, actorListXML);
-	engine.loadSprites();
-	engine.loadSounds();
-	auto result = engine.run(); -> whenever there is an exit condition
-	*/
 	return 0;
+		*/
 }

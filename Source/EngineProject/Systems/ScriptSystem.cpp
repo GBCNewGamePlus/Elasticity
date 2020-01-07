@@ -28,6 +28,7 @@ void ScriptSystem::Run()
 			{
 				LuaObject key = it.GetKey();
 				LuaObject value = it.GetValue();
+				GameEngine::GetInstance()->Print(value.GetString());
 				GameEngine::GetInstance()->PrintToWindow(value.GetString());
 			}
 		}
