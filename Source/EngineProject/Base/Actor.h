@@ -14,8 +14,21 @@ private:
 
 public:
 	Actor();
+	~Actor(void);
 	void AddComponent(ActorComponent* _component);
 	ActorComponent* GetComponent(string componentName);
+	void SetTransform(const int &matrix) { localTransform = matrix; }
+	int GetTransform() { return localTransform; }
+	int GetWorldTransform() { return worldTransform; }
+	void SetParent(Actor& p) { parent = s; }
+	void AddChild(Actor* s);
+	virtual void Update(float msec);
+
+protected:
+	Actor* parent;
+	int worldTransform;
+	int localTransform;
+	vector<Actor*> children;
 };
 
 #endif
