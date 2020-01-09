@@ -244,15 +244,17 @@ bool GameEngine::InitInstance(HINSTANCE _hInstance, HINSTANCE _previousInstance,
 
 void GameEngine::Run()
 {
-	RenderingSystem rs(hInstance, previousInstance, cmdLine, nCmdShow, szTitle);
+	RenderingSystem rs(szTitle);
 	ScriptSystem ss(&actors);
 	MSG msg;
 	ss.Run();
+	/*
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
+	*/
 }
 
 void GameEngine::AddActor(Actor* _actor)

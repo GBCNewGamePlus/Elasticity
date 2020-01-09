@@ -1,4 +1,3 @@
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include "windows.h"
 #include <stdio.h>
@@ -56,6 +55,29 @@ void MyKeyboardFunction(const Event& e)
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLine, INT nCmdShow)
 {
+	GameEngine* elasticity = GameEngine::GetInstance();
+	if (elasticity->InitInstance(hInstance, previousInstance, cmdLine, nCmdShow, "Game Title"))
+	{
+		/*
+		 * Start of GAME CODE
+		 */
+		Dispatcher::GetInstance()->Subscribe(EventType::MouseEvent, &MyMouseFunction);
+		Dispatcher::GetInstance()->Subscribe(EventType::KeyboardEvent, &MyKeyboardFunction);
+		Actor* exampleActor = new Actor();
+		ScriptComponent* sc = new ScriptComponent("Assets/Scripts/ExampleScript.lua");
+		exampleActor->AddComponent(sc);
+		elasticity->AddActor(exampleActor);
+		/*
+		 * End of GAME CODE
+		 */
+		elasticity->Run();
+		delete(sc);
+		delete(exampleActor);
+	}
+	return 0;
+
+	/*
+	CODE TO TEST INTEGRATION
 	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
@@ -72,20 +94,6 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLi
 		window.clear();
 		window.draw(shape);
 		window.display();
-	}
-	return 0;
-	/*
-
-	GameEngine* engine = GameEngine::GetInstance();
-	if (engine->InitInstance(hInstance, previousInstance, cmdLine, nCmdShow, "Game Title"))
-	{
-		Dispatcher::GetInstance()->Subscribe(EventType::MouseEvent, &MyMouseFunction);
-		Dispatcher::GetInstance()->Subscribe(EventType::KeyboardEvent, &MyKeyboardFunction);
-		Actor* exampleActor = new Actor();
-		ScriptComponent* sc = new ScriptComponent("Assets/Scripts/ExampleScript.lua");
-		exampleActor->AddComponent(sc);
-		engine->AddActor(exampleActor);
-		engine->Run();
 	}
 	return 0;
 		*/

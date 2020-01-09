@@ -20,7 +20,7 @@ public:
 	void SetTransform(const int &matrix) { localTransform = matrix; }
 	int GetTransform() { return localTransform; }
 	int GetWorldTransform() { return worldTransform; }
-	void SetParent(Actor& p) { parent = s; }
+	void SetParent(Actor* p) { parent = p; }
 	void AddChild(Actor* s);
 	virtual void Update(float msec);
 
