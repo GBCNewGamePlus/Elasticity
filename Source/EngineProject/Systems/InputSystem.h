@@ -8,6 +8,10 @@
 #include <string>
 
 using namespace std;
+/*
+namespace sf {
+
+}*/
 
 class InputSystem
 {

@@ -29,6 +29,11 @@ bool RenderingSystem::IsWindowOpen()
 
 void RenderingSystem::RenderSplashScreen() 
 {
+	window->clear();
+	/*
+	 Displays our beautiful logo
+	 */
+	window->display();
 }
 
 void RenderingSystem::RenderActors(vector<Actor*>* actors) {
