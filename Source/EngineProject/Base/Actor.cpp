@@ -1,3 +1,5 @@
+//#include "SFML/Graphics/Transform.hpp"
+#include "../Components/TransformComponent/TransformComponent.h"
 #include "Actor.h"
 #include <windows.h>
 
@@ -5,6 +7,9 @@ Actor::Actor()
 {
 	CoCreateGuid(&id);
 	parent = NULL;
+	tc = new TransformComponent();
+	worldTransform = &(tc->transform);
+	localTransform = &(tc->transform);
 }
 
 Actor::~Actor(void)
@@ -33,6 +38,11 @@ ActorComponent* Actor::GetComponent(string componentName)
 	return NULL;
 }
 
+void Actor::SetTransform(sf::Transform matrix)
+{
+	*localTransform = matrix;
+}
+
 void Actor::AddChild(Actor* s) 
 {
 	children.push_back(s);
@@ -43,7 +53,7 @@ void Actor::Update(float msec)
 {
 	if (parent) 
 	{ //This node has a parent...
-		worldTransform = parent->worldTransform * localTransform;
+		*worldTransform = *(parent->worldTransform) * *(localTransform);
 	}
 	else 
 	{ //Root node, world transform is local transform!

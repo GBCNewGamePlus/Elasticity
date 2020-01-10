@@ -1,3 +1,4 @@
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include "windows.h"
 #include <stdio.h>
@@ -15,6 +16,7 @@
 #include "LuaPlus.h"
 #include "Base/Actor.h"
 #include "Components/ScriptComponent/ScriptComponent.h"
+#include "Components/CircleComponent/CircleComponent.h"
 
 # define GCC_NEW new(NORMAL_BLOCK,FILE, __LINE_)
 
@@ -64,14 +66,16 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLi
 		Dispatcher::GetInstance()->Subscribe(EventType::MouseEvent, &MyMouseFunction);
 		Dispatcher::GetInstance()->Subscribe(EventType::KeyboardEvent, &MyKeyboardFunction);
 		Actor* exampleActor = new Actor();
-		ScriptComponent* sc = new ScriptComponent("Assets/Scripts/ExampleScript.lua");
-		exampleActor->AddComponent(sc);
+		//ScriptComponent* sc = new ScriptComponent("Assets/Scripts/ExampleScript.lua");
+		//exampleActor->AddComponent(sc);
+		CircleComponent* cc = new CircleComponent(10, sf::Color::Yellow);
+		exampleActor->AddComponent(cc);
 		elasticity->AddActor(exampleActor);
 		/*
 		 * End of GAME CODE
 		 */
 		elasticity->Run();
-		delete(sc);
+		delete(cc);
 		delete(exampleActor);
 	}
 	return 0;
