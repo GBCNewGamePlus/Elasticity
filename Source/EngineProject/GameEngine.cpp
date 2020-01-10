@@ -1,3 +1,4 @@
+#include <SFML/Graphics.hpp>
 #include "GameEngine.h"
 #include <iostream>
 #include <windows.h>
@@ -30,7 +31,6 @@ GameEngine::~GameEngine()
 
 void GameEngine::PrintToWindow(string message) 
 {
-	InputSystem::ChangeMessage(message);
 }
 
 void GameEngine::Print(string message)
@@ -246,15 +246,19 @@ void GameEngine::Run()
 {
 	RenderingSystem rs(szTitle);
 	ScriptSystem ss(&actors);
+
 	MSG msg;
 	ss.Run();
-	/*
-	while (GetMessage(&msg, NULL, 0, 0))
+	while (rs.IsWindowOpen())
 	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		sf::Event event;
+		while (rs.window->pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				rs.WindowClose();
+		}
+		rs.RenderActors(&actors);
 	}
-	*/
 }
 
 void GameEngine::AddActor(Actor* _actor)

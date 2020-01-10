@@ -4,9 +4,16 @@
 #include <windows.h>
 #include <tchar.h>
 #include <string>
-#include "InputSystem.h"
+#include <vector>
 
 using namespace std;
+
+namespace sf {
+	class RenderWindow;
+}
+
+class Actor;
+
 
 // This system creates the window
 class RenderingSystem 
@@ -18,5 +25,10 @@ public:
 	RenderingSystem(string _szTitle);
 	~RenderingSystem();
 	void WindowCreate();
+	void WindowClose();
+	bool IsWindowOpen();
+	void RenderSplashScreen();
+	void RenderActors(vector<Actor*>* actors);
+	sf::RenderWindow* window;
 };
 #endif // __INPUT_SYSTEM_H__
