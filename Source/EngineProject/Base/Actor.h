@@ -5,6 +5,11 @@
 #include "ActorComponent.h"
 #include <vector>
 using namespace std;
+namespace sf
+{
+	class Transform;
+}
+class TransformComponent;
 
 class Actor
 {
@@ -17,17 +22,18 @@ public:
 	~Actor(void);
 	void AddComponent(ActorComponent* _component);
 	ActorComponent* GetComponent(string componentName);
-	void SetTransform(const int &matrix) { localTransform = matrix; }
-	int GetTransform() { return localTransform; }
-	int GetWorldTransform() { return worldTransform; }
+	void SetTransform(sf::Transform matrix);
+	sf::Transform* GetLocalTransform() { return localTransform; }
+	sf::Transform* GetWorldTransform() { return worldTransform; }
 	void SetParent(Actor* p) { parent = p; }
 	void AddChild(Actor* s);
 	virtual void Update(float msec);
+	TransformComponent* tc;
 
 protected:
 	Actor* parent;
-	int worldTransform;
-	int localTransform;
+	sf::Transform* worldTransform;
+	sf::Transform* localTransform;
 	vector<Actor*> children;
 };
 

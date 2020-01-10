@@ -138,6 +138,7 @@ copy /y $(ProjectDir)ExternalDeps\SFML\bin\*.dll $(TargetDir)
     <ClCompile Include="Components\CameraComponent\CameraComponent.cpp" />
     <ClCompile Include="Components\CanvasComponent\CanvasComponent.cpp" />
     <ClCompile Include="Components\CanvasRendererComponent\CanvasRendererComponent.cpp" />
+    <ClCompile Include="Components\CircleComponent\CircleComponent.cpp" />
     <ClCompile Include="Components\LightComponent\LightComponent.cpp" />
     <ClCompile Include="Components\LineRendererComponent\LineRendererComponent.cpp" />
     <ClCompile Include="Components\MeshRendererComponent\MeshRendererComponent.cpp" />
@@ -170,6 +171,7 @@ copy /y $(ProjectDir)ExternalDeps\SFML\bin\*.dll $(TargetDir)
     <ClInclude Include="Components\CanvasComponent\ICanvasComponent.h" />
     <ClInclude Include="Components\CanvasRendererComponent\CanvasRendererComponent.h" />
     <ClInclude Include="Components\CanvasRendererComponent\ICanvasRendererComponent.h" />
+    <ClInclude Include="Components\CircleComponent\CircleComponent.h" />
     <ClInclude Include="Components\LightComponent\ILightComponent.h" />
     <ClInclude Include="Components\LightComponent\LightComponent.h" />
     <ClInclude Include="Components\LineRendererComponent\ILineRendererComponent.h" />
@@ -179,7 +181,6 @@ copy /y $(ProjectDir)ExternalDeps\SFML\bin\*.dll $(TargetDir)
     <ClInclude Include="Components\PhysicsComponent\BoxColliderComponent.h" />
     <ClInclude Include="Components\PhysicsComponent\IPhysicsComponent.h" />
     <ClInclude Include="Components\ScriptComponent\ScriptComponent.h" />
-    <ClInclude Include="Components\TransformComponent\ITransformComponent.h" />
     <ClInclude Include="Components\TransformComponent\TransformComponent.h" />
     <ClInclude Include="Events\EKeyboardEvent.h" />
     <ClInclude Include="Events\EMouseEvent.h" />

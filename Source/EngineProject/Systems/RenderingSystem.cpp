@@ -1,5 +1,8 @@
 #include <SFML/Graphics.hpp>
+#include "../Base/Actor.h"
+#include "../Base/ActorComponent.h"
 #include "RenderingSystem.h"
+#include "../Components/CircleComponent/CircleComponent.h"
 
 RenderingSystem::RenderingSystem(string _szTitle)
 {
@@ -33,13 +36,17 @@ void RenderingSystem::RenderSplashScreen()
 
 void RenderingSystem::RenderActors(vector<Actor*>* actors) {
 	window->clear();
-	/*
-	 Draws stuff
-	 */
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
-	window->draw(shape);
+
+	for (std::vector<Actor*>::iterator it = actors->begin(); it != actors->end(); ++it) 
+	{
+		if ((*it)->GetComponent("circleComponent"))
+		{
+			CircleComponent* cc = (CircleComponent*)(*it)->GetComponent("circleComponent");
+			sf::CircleShape shape(cc->GetRadius());
+			shape.setFillColor(cc->GetColor());
+			window->draw(shape, *(*it)->GetWorldTransform());
+		}
+	}
 
 	window->display();
-
 }

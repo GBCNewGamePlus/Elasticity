@@ -61,6 +61,9 @@
     <Filter Include="Events">
       <UniqueIdentifier>{dc228038-581a-4897-8873-3328b9a64c70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Circle">
+      <UniqueIdentifier>{b27eca4e-48a8-40e1-91ee-ee2b119f6701}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -132,6 +135,9 @@
     <ClCompile Include="Systems\ScriptSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Components\CircleComponent\CircleComponent.cpp">
+      <Filter>Components\Circle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\GameCodeApp.h">
@@ -178,9 +184,6 @@
     </ClInclude>
     <ClInclude Include="Components\PhysicsComponent\BoxColliderComponent.h">
       <Filter>Components\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\TransformComponent\ITransformComponent.h">
-      <Filter>Components\Transform</Filter>
     </ClInclude>
     <ClInclude Include="Components\AIComponent\PathfindingComponent.h">
       <Filter>Components\AI</Filter>
@@ -235,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="Systems\ScriptSystem.h">
       <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CircleComponent\CircleComponent.h">
+      <Filter>Components\Circle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
