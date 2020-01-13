@@ -12,6 +12,7 @@ TransformComponent::TransformComponent()
 	scalev = sf::Vector2<float>(0, 0);
 	//updating the main matrix
 	transform = translate * rotation * scale;
+	//transform = scale * rotation * translate;
 	componentName = "transformComponent";
 }
 TransformComponent::TransformComponent(sf::Vector2<float> trans)
@@ -24,6 +25,7 @@ TransformComponent::TransformComponent(sf::Vector2<float> trans)
 	rotationv = 0;
 	scalev = sf::Vector2<float>(0, 0);
 	transform = translate * rotation * scale;
+	//transform = scale * rotation * translate;
 	componentName = "transformComponent";
 }
 TransformComponent::TransformComponent(sf::Vector2<float> trans, float angle, sf::Vector2<float> scal)
@@ -35,6 +37,7 @@ TransformComponent::TransformComponent(sf::Vector2<float> trans, float angle, sf
 	rotationv = angle;
 	scalev = sf::Vector2<float>(scal.x,scal.y);
 	transform = translate * rotation * scale;
+	//transform = scale * rotation * translate;
 	componentName = "transformComponent";
 }
 void TransformComponent::Translate(float x, float y)
@@ -70,4 +73,5 @@ sf::Vector2<float> TransformComponent::GetScale()
 void TransformComponent::UpdateTransform()
 {
 	transform = translate * rotation * scale;
+	//transform = scale * rotation * translate;
 }

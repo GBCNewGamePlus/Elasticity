@@ -17,6 +17,7 @@
 #include "Base/Actor.h"
 #include "Components/ScriptComponent/ScriptComponent.h"
 #include "Components/CircleComponent/CircleComponent.h"
+#include "Components/TransformComponent/TransformComponent.h"
 
 # define GCC_NEW new(NORMAL_BLOCK,FILE, __LINE_)
 
@@ -65,18 +66,29 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLi
 		 */
 		Dispatcher::GetInstance()->Subscribe(EventType::MouseEvent, &MyMouseFunction);
 		Dispatcher::GetInstance()->Subscribe(EventType::KeyboardEvent, &MyKeyboardFunction);
-		Actor* exampleActor = new Actor();
 		//ScriptComponent* sc = new ScriptComponent("Assets/Scripts/ExampleScript.lua");
 		//exampleActor->AddComponent(sc);
-		CircleComponent* cc = new CircleComponent(10, sf::Color::Yellow);
-		exampleActor->AddComponent(cc);
-		elasticity->AddActor(exampleActor);
+
+		Actor* sun = new Actor();
+		sun->AddComponent(new CircleComponent(10, sf::Color::Yellow));
+		sun->tc->Translate(200, 200);
+		sun->tc->Scale(10, 10);
+
+		Actor* earth = new Actor();
+		earth->AddComponent(new CircleComponent(10, sf::Color::Blue));
+		earth->tc->Translate(0, 0);
+		earth->tc->Scale(0.3, 0.3);
+		sun->AddChild(earth);
+		sun->tc->Translate(300, 200);
+		//sun->tc->Rotate(90);
+
+		elasticity->AddActor(sun);
+		elasticity->AddActor(earth);
 		/*
 		 * End of GAME CODE
 		 */
 		elasticity->Run();
-		delete(cc);
-		delete(exampleActor);
+		delete(sun);
 	}
 	return 0;
 

@@ -8,6 +8,7 @@
 #include <tchar.h>
 #include <string>
 #include "Systems/ScriptSystem.h"
+#include <time.h>
 
 using namespace std;
 
@@ -249,6 +250,8 @@ void GameEngine::Run()
 
 	MSG msg;
 	ss.Run();
+	float oldTime = 0;
+	float deltaTime;
 	while (rs.IsWindowOpen())
 	{
 		sf::Event event;
@@ -256,6 +259,13 @@ void GameEngine::Run()
 		{
 			if (event.type == sf::Event::Closed)
 				rs.WindowClose();
+		}
+
+		deltaTime = clock() - oldTime;
+		oldTime = clock();
+		for (std::vector<Actor*>::iterator it = actors.begin(); it != actors.end(); ++it)
+		{
+			(*it)->Update(deltaTime);
 		}
 		rs.RenderActors(&actors);
 	}

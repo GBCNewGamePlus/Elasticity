@@ -8,7 +8,7 @@ Actor::Actor()
 	CoCreateGuid(&id);
 	parent = NULL;
 	tc = new TransformComponent();
-	worldTransform = &(tc->transform);
+	worldTransform = new sf::Transform();
 	localTransform = &(tc->transform);
 }
 
@@ -46,7 +46,7 @@ void Actor::SetTransform(sf::Transform matrix)
 void Actor::AddChild(Actor* s) 
 {
 	children.push_back(s);
-	s->parent = this;
+	s->SetParent(this);
 }
 
 void Actor::Update(float msec) 
@@ -59,8 +59,8 @@ void Actor::Update(float msec)
 	{ //Root node, world transform is local transform!
 		worldTransform = localTransform;
 	}
-	for (vector<Actor*>::iterator i = children.begin(); i != children.end(); ++i)
+	/*for (vector<Actor*>::iterator i = children.begin(); i != children.end(); ++i)
 	{
 		(*i)->Update(msec);
-	}
+	}*/
 }
