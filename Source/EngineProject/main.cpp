@@ -37,7 +37,7 @@ void MyMouseFunction(const Event& e) {
 		printing += number;
 		printing += ")";
 		printing = myMouseEvent.leftClick ? "Left " + printing : "Right " + printing;
-		GameEngine::GetInstance()->PrintToWindow(printing);
+		GameEngine::GetInstance()->Print(printing);
 	}
 }
 
@@ -52,65 +52,50 @@ void MyKeyboardFunction(const Event& e)
 			message += myKeyboardEvent.keyChar;
 		else
 			message += myKeyboardEvent.keyInt;
-		GameEngine::GetInstance()->PrintToWindow(message);
+		GameEngine::GetInstance()->Print(message);
 	}
 }
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLine, INT nCmdShow)
 {
 	GameEngine* elasticity = GameEngine::GetInstance();
-	if (elasticity->InitInstance(hInstance, previousInstance, cmdLine, nCmdShow, "Game Title"))
+	if (elasticity->InitInstance("Game Title"))
 	{
 		/*
 		 * Start of GAME CODE
 		 */
 		Dispatcher::GetInstance()->Subscribe(EventType::MouseEvent, &MyMouseFunction);
 		Dispatcher::GetInstance()->Subscribe(EventType::KeyboardEvent, &MyKeyboardFunction);
-		//ScriptComponent* sc = new ScriptComponent("Assets/Scripts/ExampleScript.lua");
-		//exampleActor->AddComponent(sc);
 
 		Actor* sun = new Actor();
 		sun->AddComponent(new CircleComponent(10, sf::Color::Yellow));
+		sun->AddComponent(new ScriptComponent("Assets/Scripts/ExampleScript.lua"));
+
+		// Initial position of the Sun
 		sun->tc->Translate(200, 200);
 		sun->tc->Scale(10, 10);
 
 		Actor* earth = new Actor();
 		earth->AddComponent(new CircleComponent(10, sf::Color::Blue));
+		earth->AddComponent(new ScriptComponent("Assets/Scripts/ExampleScript.lua"));
+
+		// Initial position of earth
 		earth->tc->Translate(0, 0);
 		earth->tc->Scale(0.3, 0.3);
 		sun->AddChild(earth);
-		sun->tc->Translate(300, 200);
-		//sun->tc->Rotate(90);
+
+		// moving the sun a little bit - nah, not really
+		//sun->tc->Translate(300, 200);
 
 		elasticity->AddActor(sun);
 		elasticity->AddActor(earth);
 		/*
 		 * End of GAME CODE
 		 */
+
+
 		elasticity->Run();
 		delete(sun);
 	}
 	return 0;
-
-	/*
-	CODE TO TEST INTEGRATION
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
-
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-
-		window.clear();
-		window.draw(shape);
-		window.display();
-	}
-	return 0;
-		*/
 }

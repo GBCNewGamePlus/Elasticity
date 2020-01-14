@@ -15,11 +15,11 @@ namespace sf {
 
 class InputSystem
 {
-private:
-	InputSystem();
-	static InputSystem *s_instance;
+private: 
+	sf::RenderWindow* window;
 public:
-	static InputSystem GetInputSystem();
+	InputSystem(sf::RenderWindow* _window);
+	bool Update();
 };
 
 #endif 
