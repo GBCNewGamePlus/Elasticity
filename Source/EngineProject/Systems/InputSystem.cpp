@@ -33,7 +33,7 @@ bool InputSystem::Update() {
 				Dispatcher::GetInstance()->Post(
 					EMouseEvent(event.mouseButton.x, 
 						        event.mouseButton.y, 
-						        event.mouseButton.button == sf::Mouse::Right));
+						        event.mouseButton.button == sf::Mouse::Left));
 				break;
 		}
 		if (event.type == sf::Event::Closed) {
