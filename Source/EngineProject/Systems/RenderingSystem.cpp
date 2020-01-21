@@ -4,19 +4,12 @@
 #include "RenderingSystem.h"
 #include "../Components/CircleComponent/CircleComponent.h"
 
-RenderingSystem::RenderingSystem(string _szTitle)
+RenderingSystem::RenderingSystem(sf::RenderWindow* _window)
 {
-	szTitle = _szTitle;
-	WindowCreate();
+	window = _window;
 }
 
 RenderingSystem::~RenderingSystem() {
-	delete window;
-}
-
-void RenderingSystem::WindowCreate()
-{
-	window = new sf::RenderWindow(sf::VideoMode(1080, 960), szTitle);
 }
 
 void RenderingSystem::WindowClose()
@@ -28,15 +21,6 @@ bool RenderingSystem::IsWindowOpen()
 {
 	if (window) return window->isOpen();
 	return false;
-}
-
-void RenderingSystem::RenderSplashScreen() 
-{
-	window->clear();
-	/*
-	 Displays our beautiful logo
-	 */
-	window->display();
 }
 
 void RenderingSystem::RenderActors(vector<Actor*>* actors) {

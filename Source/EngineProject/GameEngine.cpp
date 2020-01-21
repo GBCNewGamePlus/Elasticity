@@ -8,11 +8,14 @@
 #include <tchar.h>
 #include <string>
 #include "Systems/ScriptSystem.h"
+#include "Systems/RenderingSystem.h"
+#include "Systems/InputSystem.h"
 #include <time.h>
 
 using namespace std;
 
 GameEngine* GameEngine::instance = 0;
+
 GameEngine* GameEngine::GetInstance()
 {
 	if (!instance)
@@ -30,6 +33,9 @@ GameEngine::~GameEngine()
 {
 }
 
+/*
+ * Log functions
+ */
 void GameEngine::PrintToWindow(string message) 
 {
 }
@@ -41,6 +47,10 @@ void GameEngine::Print(string message)
 	sprintf_s(buf, message.c_str());
 	OutputDebugStringA(buf);
 }
+
+/*
+ * Initialization Functions
+ */
 
 bool GameEngine::IsOnlyInstance(LPCTSTR gameTitle)
 {
@@ -219,13 +229,16 @@ void GameEngine::ReadCPUSpeed()
 	Print(cpuType);
 }
 
-bool GameEngine::InitInstance(HINSTANCE _hInstance, HINSTANCE _previousInstance, PSTR _cmdLine, INT _nCmdShow, string _szTitle)
+/*
+ * The real game engine
+ */
+
+bool GameEngine::InitInstance(string _szTitle)
 {
-	hInstance = _hInstance;
-	previousInstance = _previousInstance;
-	cmdLine = _cmdLine;
-	nCmdShow = _nCmdShow;
 	szTitle = _szTitle;
+	// Creates window as soon as the game engine is initialized
+	window = new sf::RenderWindow(sf::VideoMode(1080, 960), szTitle);
+	RenderSplashScreen();
 
 	if (IsOnlyInstance(szTitle.c_str()))
 	{
@@ -233,42 +246,81 @@ bool GameEngine::InitInstance(HINSTANCE _hInstance, HINSTANCE _previousInstance,
 		bool result = CheckStorage(DISK_SPACE_NEEDED) && CheckMemory(PHYSICAL_MEMORY_NEEDED, VIRTUAL_MEMORY_NEEDED);
 		if (result) { ReadCPUSpeed(); }
 		Print("Finished system check...");
+		currentState = GameState::GameLoop;
 		return result;
 	}
 	else
 	{
+		currentState = GameState::Exiting;
 		return false;
 	}
 
 	
 }
 
+void GameEngine::RenderSplashScreen()
+{
+	window->clear();
+	sf::Texture texture;
+	if (texture.loadFromFile("Assets\\Images\\SplashScreen.png") != true) {
+		return;
+	}
+	sf::Sprite sprite(texture);
+	window->draw(sprite);
+	window->display();
+	sf::Event loadingEvent;
+	/*
+	 Displays our beautiful logo
+	 */
+	while (currentState == GameState::Initializing) {
+		while (window->pollEvent(loadingEvent)) {
+			if (loadingEvent.type == sf::Event::EventType::KeyPressed
+				|| loadingEvent.type == sf::Event::EventType::MouseButtonPressed
+				|| loadingEvent.type == sf::Event::EventType::Closed) {
+				return;
+			}
+		}
+	}
+}
+
+
 void GameEngine::Run()
 {
-	RenderingSystem rs(szTitle);
+	RenderingSystem rs(window);
+	InputSystem is(window);
 	ScriptSystem ss(&actors);
 
 	MSG msg;
 	ss.Run();
-	float oldTime = 0;
+	float oldTime = clock();
 	float deltaTime;
 	while (rs.IsWindowOpen())
 	{
-		sf::Event event;
-		while (rs.window->pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				rs.WindowClose();
-		}
-
+		/*
+		 * calculates DT
+		 */
 		deltaTime = clock() - oldTime;
 		oldTime = clock();
+		/*
+		 * Verify events
+		 */
+		if (!is.Update()) {
+			rs.WindowClose();
+		}
+		/*
+		 * Update Actors
+		 */
 		for (std::vector<Actor*>::iterator it = actors.begin(); it != actors.end(); ++it)
 		{
 			(*it)->Update(deltaTime);
 		}
+		/*
+		 * Renders updated actors
+		 */
 		rs.RenderActors(&actors);
 	}
+	// just before leaving 
+	delete window;
 }
 
 void GameEngine::AddActor(Actor* _actor)
