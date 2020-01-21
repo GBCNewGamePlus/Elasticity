@@ -78,9 +78,10 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLi
 		earth->AddComponent(new CircleComponent(10, sf::Color::Blue));
 		earth->tc->Translate(0, 0);
 		earth->tc->Scale(0.3, 0.3);
+
 		sun->AddChild(earth);
 		sun->tc->Translate(300, 200);
-		//sun->tc->Rotate(90);
+		sun->tc->Rotate(90);
 
 		elasticity->AddActor(sun);
 		elasticity->AddActor(earth);
