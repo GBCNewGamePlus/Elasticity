@@ -83,6 +83,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLi
 		earth->tc->TranslateBy(0, 0);
 		earth->tc->ScaleBy(0.3, 0.3);
 		sun->AddChild(earth);
+		sun->tc->TranslateBy(300, 200);
+		sun->tc->RotateBy(90);
 
 		// moving the sun a little bit - nah, not really
 		//sun->tc->Translate(300, 200);
