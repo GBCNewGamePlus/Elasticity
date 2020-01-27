@@ -72,16 +72,16 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLi
 		sun->AddComponent(new ScriptComponent("Assets/Scripts/ExampleScript.lua"));
 
 		// Initial position of the Sun
-		sun->tc->Translate(200, 200);
-		sun->tc->Scale(10, 10);
+		sun->tc->TranslateBy(200, 200);
+		sun->tc->ScaleBy(10, 10);
 
 		Actor* earth = new Actor();
 		earth->AddComponent(new CircleComponent(10, sf::Color::Blue));
 		earth->AddComponent(new ScriptComponent("Assets/Scripts/ExampleScript.lua"));
 
 		// Initial position of earth
-		earth->tc->Translate(0, 0);
-		earth->tc->Scale(0.3, 0.3);
+		earth->tc->TranslateBy(0, 0);
+		earth->tc->ScaleBy(0.3, 0.3);
 		sun->AddChild(earth);
 
 		// moving the sun a little bit - nah, not really

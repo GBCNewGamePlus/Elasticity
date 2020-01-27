@@ -237,7 +237,7 @@ bool GameEngine::InitInstance(string _szTitle)
 {
 	szTitle = _szTitle;
 	// Creates window as soon as the game engine is initialized
-	window = new sf::RenderWindow(sf::VideoMode(1080, 960), szTitle);
+	window = new sf::RenderWindow(sf::VideoMode(1080, 960), szTitle, sf::Style::None );
 	RenderSplashScreen();
 
 	if (IsOnlyInstance(szTitle.c_str()))

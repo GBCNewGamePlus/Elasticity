@@ -17,7 +17,6 @@ TransformComponent::TransformComponent()
 }
 TransformComponent::TransformComponent(sf::Vector2<float> trans)
 {
-
 	translate.translate(trans.x, trans.y);
 	rotation.rotate(0);
 	scale.scale(0, 0);
@@ -40,19 +39,38 @@ TransformComponent::TransformComponent(sf::Vector2<float> trans, float angle, sf
 	//transform = scale * rotation * translate;
 	componentName = "transformComponent";
 }
-void TransformComponent::Translate(float x, float y)
+
+void TransformComponent::SetPosition(float x, float y)
+{
+	transform = transform.Identity;
+	transform.translate(x, y);
+}
+
+void TransformComponent::SetRotation(float angle)
+{
+	rotation = rotation.Identity;
+	rotation.rotate(angle);
+}
+
+void TransformComponent::SetScale(float x, float y)
+{
+	scale = scale.Identity;
+	scale.scale(x, y);
+}
+
+void TransformComponent::TranslateBy(float x, float y)
 {
 	translate.translate(x, y);
 	translationv += sf::Vector2<float>(x, y);
 	UpdateTransform();
 }
-void TransformComponent::Rotate(float angle)
+void TransformComponent::RotateBy(float angle)
 {
 	rotation.rotate(angle);
 	rotationv += angle;
 	UpdateTransform();
 }
-void TransformComponent::Scale(float x, float y)
+void TransformComponent::ScaleBy(float x, float y)
 {
 	scale.scale(x, y);
 	scalev += sf::Vector2<float>(x, y);
