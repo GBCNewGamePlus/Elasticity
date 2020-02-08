@@ -64,6 +64,9 @@
     <Filter Include="Components\Circle">
       <UniqueIdentifier>{b27eca4e-48a8-40e1-91ee-ee2b119f6701}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Square">
+      <UniqueIdentifier>{d0eb7c7c-5734-4d40-bffc-399cf9f71be5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -137,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="Components\CircleComponent\CircleComponent.cpp">
       <Filter>Components\Circle</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\SquareComponent\SquareComponent.cpp">
+      <Filter>Components\Square</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="Components\CircleComponent\CircleComponent.h">
       <Filter>Components\Circle</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\SquareComponent\SquareComponent.h">
+      <Filter>Components\Square</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

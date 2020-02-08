@@ -17,6 +17,7 @@
 #include "Base/Actor.h"
 #include "Components/ScriptComponent/ScriptComponent.h"
 #include "Components/CircleComponent/CircleComponent.h"
+#include "Components/SquareComponent/SquareComponent.h"
 #include "Components/TransformComponent/TransformComponent.h"
 
 # define GCC_NEW new(NORMAL_BLOCK,FILE, __LINE_)
@@ -83,14 +84,23 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLi
 		earth->tc->TranslateBy(0, 0);
 		earth->tc->ScaleBy(0.3, 0.3);
 		sun->AddChild(earth);
-		sun->tc->TranslateBy(300, 200);
+		sun->tc->TranslateBy(50, 50);
 		sun->tc->RotateBy(90);
 
-		// moving the sun a little bit - nah, not really
-		//sun->tc->Translate(300, 200);
+		Actor* box1 = new Actor();
+		box1->AddComponent(new SquareComponent(50, sf::Color::Red));
+		box1->tc->TranslateBy(500, 500);
+		box1->tc->RotateBy(45);
+
+		Actor* box2 = new Actor();
+		box2->AddComponent(new SquareComponent(50, sf::Color::Blue));
+		box2->tc->TranslateBy(600, 500);
+		box2->tc->RotateBy(45);
 
 		elasticity->AddActor(sun);
 		elasticity->AddActor(earth);
+		elasticity->AddActor(box1);
+		elasticity->AddActor(box2);
 		/*
 		 * End of GAME CODE
 		 */

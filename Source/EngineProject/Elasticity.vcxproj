@@ -147,6 +147,7 @@ copy /y $(ProjectDir)ExternalDeps\SFML\lib\*.pdb $(TargetDir)
     <ClCompile Include="Components\MeshRendererComponent\MeshRendererComponent.cpp" />
     <ClCompile Include="Components\PhysicsComponent\BoxColliderComponent.cpp" />
     <ClCompile Include="Components\ScriptComponent\ScriptComponent.cpp" />
+    <ClCompile Include="Components\SquareComponent\SquareComponent.cpp" />
     <ClCompile Include="Components\TransformComponent\TransformComponent.cpp" />
     <ClCompile Include="Events\EKeyboardEvent.cpp" />
     <ClCompile Include="Events\EMouseEvent.cpp" />
@@ -184,6 +185,7 @@ copy /y $(ProjectDir)ExternalDeps\SFML\lib\*.pdb $(TargetDir)
     <ClInclude Include="Components\PhysicsComponent\BoxColliderComponent.h" />
     <ClInclude Include="Components\PhysicsComponent\IPhysicsComponent.h" />
     <ClInclude Include="Components\ScriptComponent\ScriptComponent.h" />
+    <ClInclude Include="Components\SquareComponent\SquareComponent.h" />
     <ClInclude Include="Components\TransformComponent\TransformComponent.h" />
     <ClInclude Include="Events\EKeyboardEvent.h" />
     <ClInclude Include="Events\EMouseEvent.h" />

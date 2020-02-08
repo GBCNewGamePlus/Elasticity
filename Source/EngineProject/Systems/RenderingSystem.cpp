@@ -3,6 +3,7 @@
 #include "../Base/ActorComponent.h"
 #include "RenderingSystem.h"
 #include "../Components/CircleComponent/CircleComponent.h"
+#include "../Components/SquareComponent/SquareComponent.h"
 
 RenderingSystem::RenderingSystem(sf::RenderWindow* _window)
 {
@@ -33,6 +34,13 @@ void RenderingSystem::RenderActors(vector<Actor*>* actors) {
 			CircleComponent* cc = (CircleComponent*)(*it)->GetComponent("circleComponent");
 			sf::CircleShape shape(cc->GetRadius());
 			shape.setFillColor(cc->GetColor());
+			window->draw(shape, *(*it)->GetWorldTransform());
+		}
+		else if ((*it)->GetComponent("squareComponent"))
+		{
+			SquareComponent* sc = (SquareComponent*)(*it)->GetComponent("squareComponent");
+			sf::CircleShape shape(sc->GetLength(), 4);
+			shape.setFillColor(sc->GetColor());
 			window->draw(shape, *(*it)->GetWorldTransform());
 		}
 	}
