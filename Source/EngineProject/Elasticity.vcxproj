@@ -156,6 +156,7 @@ copy /y $(ProjectDir)ExternalDeps\SFML\lib\*.pdb $(TargetDir)
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Systems\InputSystem.cpp" />
     <ClCompile Include="Systems\RenderingSystem.cpp" />
+    <ClCompile Include="Systems\RigidBodySystem.cpp" />
     <ClCompile Include="Systems\ScriptSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +195,7 @@ copy /y $(ProjectDir)ExternalDeps\SFML\lib\*.pdb $(TargetDir)
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="Systems\InputSystem.h" />
     <ClInclude Include="Systems\RenderingSystem.h" />
+    <ClInclude Include="Systems\RigidBodySystem.h" />
     <ClInclude Include="Systems\ScriptSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

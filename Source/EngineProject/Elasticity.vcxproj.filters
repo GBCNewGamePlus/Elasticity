@@ -150,6 +150,9 @@
     <ClCompile Include="Components\RigidBodyComponent\RigidBody.cpp">
       <Filter>Components\RigidBody</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\RigidBodySystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\GameCodeApp.h">
@@ -259,6 +262,9 @@
     </ClInclude>
     <ClInclude Include="Components\RigidBodyComponent\RigidBody.h">
       <Filter>Components\RigidBody</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\RigidBodySystem.h">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

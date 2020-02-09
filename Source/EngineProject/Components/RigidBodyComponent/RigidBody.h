@@ -2,6 +2,7 @@
 #define __RIGIDBODY_COMPONENT_H__
 #include "../../Base/ActorComponent.h" 
 #include "SFML/System/Vector2.hpp"
+#include "../../Systems/RigidBodySystem.h"
 
 struct AABB
 {
@@ -31,6 +32,7 @@ class RigidBody : public ActorComponent
 {
 public:
 	RigidBody();
+	int id;
 	float mass;                              // Mass of the RigidBody
 	float bounciness;                        // The bounciness factor (value between 0 and 1, 0 being no bounce, and 1 being super bouncy!)
 	bool obeysGravity;                       // Whether or not this body obeys gravity
@@ -49,7 +51,8 @@ public:
 
 private:
 	sf::Vector2<float> totalForces;
-	//PhysicsEngine engine;
+	// TO DO: Get a reference to rigid body system.
+	//RigidBodySystem rbs; // Reference to RigidBodySystem
 };
 
 #endif 

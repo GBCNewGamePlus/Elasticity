@@ -2,6 +2,8 @@
 
 RigidBody::RigidBody()
 {
+	componentName = "rigidBodyComponent";
+	id = -1; // -1 = ID not set. ID is set by the RigidBodySystem.
 	mass = 1.0f;
 	bounciness = 1.0f;
 	obeysGravity = true;
