@@ -1,4 +1,8 @@
 #include "RigidBody.h"
+#include "../../Systems/RigidBodySystem.h"
+#include "../CircleComponent/CircleComponent.h"
+#include "../SquareComponent/SquareComponent.h"
+#include "../TransformComponent/TransformComponent.h"
 
 RigidBody::RigidBody()
 {
@@ -10,14 +14,12 @@ RigidBody::RigidBody()
 	gravity = sf::Vector2<float>(0, -9.8f);
 	maxVelocity = sf::Vector2<float>(10.0f, 10.0f);
 	SetAABB();
-	//engine = GameObject.FindWithTag("PhysicsEngine").GetComponent<PhysicsEngine>();
-	//engine.AddRigidBody(this);
+	rigidBodySystem->AddRigidBody(*this);
 }
 
 void RigidBody::AddVelocity(sf::Vector2<float> v)
 {
 	currentVelocity += v;
-	//currentVelocity = v;
 }
 
 void RigidBody::AddForce(sf::Vector2<float> force)
@@ -33,21 +35,25 @@ void RigidBody::Stop()
 
 bool RigidBody::IsGrounded()
 {
-	//grounded = engine.IsGrounded(this);
-	grounded = false; // CHANGE THIS!
+	grounded = rigidBodySystem->IsGrounded(*this);
 	return grounded;
 }
 
 void RigidBody::SetAABB()
 {
-	Bounds bound(sf::Vector2<float>(0, 0), sf::Vector2<float>(1, 1));
-
-	// THIS NEEDS AN UPDATE!
-	/*Renderer renderer = GetComponent<Renderer>();
-	if (renderer)
+	sf::Vector2<float> center = transform->GetLocation();
+	sf::Vector2<float> size = transform->GetScale();
+	if (circleComponent)
 	{
-		bound = renderer.bounds;
-	}*/
+		size.x = size.x * circleComponent->GetRadius();
+		size.y = size.y * circleComponent->GetRadius();
+	}
+	else if (squareComponent)
+	{
+		size.x = size.x * squareComponent->GetLength();
+		size.y = size.y * squareComponent->GetLength();
+	}
+	Bounds bound(center, size);
 
 	aabb.bLeft = sf::Vector2<float>(bound.center.x - bound.extents.x, bound.center.y - bound.extents.y);
 	aabb.tRight = sf::Vector2<float>(bound.center.x + bound.extents.x, bound.center.y + bound.extents.y);
@@ -74,9 +80,9 @@ void RigidBody::Integrate(float dt)
 	currentVelocity += acceleration * dt;
 
 	// TO DO: Access the transform component and update the position!
-	//sf::Vector2<float> temp = transform.position;
-	//temp += currentVelocity * dT;
-	//transform.position = temp;
+	sf::Vector2<float> temp = transform->GetLocation();
+	temp += currentVelocity * dt;
+	transform->SetPosition(temp.x, temp.y);
 
 	SetAABB();
 	totalForces = sf::Vector2<float>(0, 0);

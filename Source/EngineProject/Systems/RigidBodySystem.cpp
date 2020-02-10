@@ -1,10 +1,25 @@
+#include "../Components/TransformComponent/TransformComponent.h"
 #include "RigidBodySystem.h"
 #include "../Base/Actor.h"
+#include "../Components/RigidBodyComponent/RigidBody.h"
 
 RigidBodySystem::RigidBodySystem()
 {
 	groundedTol = 0.1f;
 	nextId = 0;
+}
+
+RigidBody* RigidBodySystem::GetRigidBody(int id)
+{
+	list<RigidBody>::iterator rb;
+	for (rb = rigidBodies.begin(); rb != rigidBodies.end(); ++rb)
+	{
+		if (rb->id == id)
+		{
+			return &(*rb);
+		}
+	}
+	return NULL;
 }
 
 void RigidBodySystem::AddRigidBody(RigidBody rigidBody) 
@@ -52,16 +67,12 @@ void RigidBodySystem::CheckCollisions()
 		{
 			if ((*bodyA).id != (*bodyB).id) 
 			{
-				CollisionPair pair;
-				CollisionInfo colInfo;
-				*pair.rigidBodyA = (*bodyA);
-				*pair.rigidBodyB = (*bodyB);
+				Collision collision;
+				collision.rigidBodyA = bodyA->id;
+				collision.rigidBodyB = bodyB->id;
 
 				// TO DO: Get positions from the transform components as parameters.
-				//sf::Vector2<float> distance = bodyB.transform.position - bodyA.transform.position;
-
-				// TO DO: Remove this line once you have access to the actual distance.
-				sf::Vector2<float> distance = sf::Vector2<float>(0,0);
+				sf::Vector2<float> distance = bodyB->transform->GetLocation() - bodyA->transform->GetLocation();
 
 				sf::Vector2<float> halfSizeA = ((*bodyA).aabb.tRight - (*bodyA).aabb.bLeft);
 				halfSizeA.x /= 2;
@@ -75,43 +86,49 @@ void RigidBodySystem::CheckCollisions()
 
 				if (gap.x < 0 && gap.y < 0) 
 				{
-					map<CollisionPair, CollisionInfo>::iterator thisPair = collisions.find(pair);
-					if (thisPair != collisions.end())
+					list<Collision>::iterator c;
+					for (c = collisions.begin(); c != collisions.end(); ++c)
 					{
-						collisions.erase(thisPair);
+						if (c->rigidBodyA == collision.rigidBodyA && c->rigidBodyB == collision.rigidBodyB)
+						{
+							collisions.erase(c);
+						}
 					}
 
 					if (gap.x > gap.y) 
 					{
 						if (distance.x > 0) 
 						{
-							colInfo.collisionNormal = sf::Vector2<float>(1, 0);
+							collision.collisionNormal = sf::Vector2<float>(1, 0);
 						}
 						else 
 						{
-							colInfo.collisionNormal = sf::Vector2<float>(-1, 0);
+							collision.collisionNormal = sf::Vector2<float>(-1, 0);
 						}
-						colInfo.penetration = gap.x;
+						collision.penetration = gap.x;
 					}
 					else {
 						if (distance.y > 0) 
 						{
-							colInfo.collisionNormal = sf::Vector2<float>(0, 1);
+							collision.collisionNormal = sf::Vector2<float>(0, 1);
 						}
 						else
 						{
-							colInfo.collisionNormal = sf::Vector2<float>(0, -1);
+							collision.collisionNormal = sf::Vector2<float>(0, -1);
 						}
-						colInfo.penetration = gap.y;
+						collision.penetration = gap.y;
 					}
-					collisions.insert({ pair, colInfo });
+					collisions.push_back(collision);
 				}
 				else
 				{
-					map<CollisionPair, CollisionInfo>::iterator thisPair = collisions.find(pair);
-					if (thisPair != collisions.end())
+					list<Collision>::iterator c;
+					for (c = collisions.begin(); c != collisions.end(); ++c)
 					{
-						collisions.erase(thisPair);
+						if (c->rigidBodyA == collision.rigidBodyA && c->rigidBodyB == collision.rigidBodyB)
+						{
+							collisions.erase(c);
+						}
 					}
 				}
 			}
@@ -135,63 +152,58 @@ float RigidBodySystem::Dot(sf::Vector2<float> vectorA, sf::Vector2<float> vector
 
 void RigidBodySystem::ResolveCollisions()
 {
-	vector<CollisionPair> pairs;
-	for (map<CollisionPair, CollisionInfo>::iterator it = collisions.begin(); it != collisions.end(); ++it)
+	list<Collision>::iterator c;
+	for (c = collisions.begin(); c != collisions.end(); ++c)
 	{
-		pairs.push_back(it->first);
-	}
-	
-	for (auto pair = pairs.begin(); pair != pairs.end(); ++pair)
-	{
-		float minBounce = GetMin(pair->rigidBodyA->bounciness, pair->rigidBodyB->bounciness);
-		float velAlongNormal = Dot(pair->rigidBodyB->currentVelocity - pair->rigidBodyA->currentVelocity, collisions[(*pair)].collisionNormal);
+		float minBounce = GetMin(GetRigidBody(c->rigidBodyA)->bounciness, GetRigidBody(c->rigidBodyB)->bounciness);
+		float velAlongNormal = Dot(GetRigidBody(c->rigidBodyB)->currentVelocity - GetRigidBody(c->rigidBodyA)->currentVelocity, c->collisionNormal);
 		if (velAlongNormal > 0) continue;
 
 		float j = -(1 + minBounce) * velAlongNormal;
 		float invMassA, invMassB;
 
-		if (pair->rigidBodyA->mass == 0)
+		if (GetRigidBody(c->rigidBodyA)->mass == 0)
 			invMassA = 0;
 		else
-			invMassA = 1 / pair->rigidBodyA->mass;
+			invMassA = 1 / GetRigidBody(c->rigidBodyA)->mass;
 
-		if (pair->rigidBodyB->mass == 0)
+		if (GetRigidBody(c->rigidBodyB)->mass == 0)
 			invMassB = 0;
 		else
-			invMassB = 1 / pair->rigidBodyB->mass;
+			invMassB = 1 / GetRigidBody(c->rigidBodyB)->mass;
 
 		j /= invMassA + invMassB;
 
-		sf::Vector2<float> impulse = j * collisions[(*pair)].collisionNormal;
+		sf::Vector2<float> impulse = j * c->collisionNormal;
 
 		sf::Vector2<float> velocityA = invMassA * impulse;
 		sf::Vector2<float> velocityB = invMassB * impulse;
-		pair->rigidBodyA->AddVelocity(-velocityA);
-		pair->rigidBodyB->AddVelocity(velocityB);
+		GetRigidBody(c->rigidBodyA)->AddVelocity(-velocityA);
+		GetRigidBody(c->rigidBodyB)->AddVelocity(velocityB);
 
-		if (abs(collisions[(*pair)].penetration) > 0.01f)
+		if (abs(c->penetration) > 0.01f)
 		{
-			PositionalCorrection((*pair));
+			PositionalCorrection((*c));
 		}
 	}
 }
 
-void RigidBodySystem::PositionalCorrection(CollisionPair c) 
+void RigidBodySystem::PositionalCorrection(Collision c) 
 {
 	const float percent = 0.2f;
 
 	float invMassA, invMassB;
-	if (c.rigidBodyA->mass == 0)
+	if (GetRigidBody(c.rigidBodyA)->mass == 0)
 		invMassA = 0;
 	else
-		invMassA = 1 / c.rigidBodyA->mass;
+		invMassA = 1 / GetRigidBody(c.rigidBodyA)->mass;
 
-	if (c.rigidBodyB->mass == 0)
+	if (GetRigidBody(c.rigidBodyB)->mass == 0)
 		invMassB = 0;
 	else
-		invMassB = 1 / c.rigidBodyB->mass;
+		invMassB = 1 / GetRigidBody(c.rigidBodyB)->mass;
 
-	sf::Vector2<float> correction = ((collisions[c].penetration / (invMassA + invMassB)) * percent) * -collisions[c].collisionNormal;
+	sf::Vector2<float> correction = ((c.penetration / (invMassA + invMassB)) * percent) * -c.collisionNormal;
 
 	// TO DO: Get the position from the transform component as a function parameter.
 	//sf::Vector2<float> temp = c.rigidBodyA.transform.position;
@@ -211,8 +223,10 @@ void RigidBodySystem::UpdatePhysics(vector<Actor*>* actors, float dt)
 {
 	for (std::vector<Actor*>::iterator it = actors->begin(); it != actors->end(); ++it)
 	{
-		if ((*it)->GetComponent("rigidBodyComponent"))
+		RigidBody* rigidBody = (RigidBody*)(*it)->GetComponent("rigidBodyComponent");
+		if (rigidBody)
 		{
+			rigidBody->rigidBodySystem = this;
 			IntegrateBodies(dt);
 			CheckCollisions();
 			ResolveCollisions();

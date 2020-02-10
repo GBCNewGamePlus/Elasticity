@@ -2,7 +2,11 @@
 #define __RIGIDBODY_COMPONENT_H__
 #include "../../Base/ActorComponent.h" 
 #include "SFML/System/Vector2.hpp"
-#include "../../Systems/RigidBodySystem.h"
+
+class RigidBodySystem;
+class CircleComponent;
+class SquareComponent;
+class TransformComponent;
 
 struct AABB
 {
@@ -41,6 +45,10 @@ public:
 	sf::Vector2<float> maxVelocity;          // The maximum allowed velocity for this object
 	bool grounded;
 	AABB aabb;
+	RigidBodySystem* rigidBodySystem;
+	TransformComponent* transform;
+	CircleComponent* circleComponent;
+	SquareComponent* squareComponent;
 
 	void AddVelocity(sf::Vector2<float> v);
 	void AddForce(sf::Vector2<float> force);
@@ -51,8 +59,6 @@ public:
 
 private:
 	sf::Vector2<float> totalForces;
-	// TO DO: Get a reference to rigid body system.
-	//RigidBodySystem rbs; // Reference to RigidBodySystem
 };
 
 #endif 

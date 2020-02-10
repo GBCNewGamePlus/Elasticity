@@ -5,22 +5,16 @@
 #include <list> 
 #include <map> 
 #include "SFML/System/Vector2.hpp"
-#include "../Components/RigidBodyComponent/RigidBody.h"
 
 using namespace std;
 namespace sf {class RenderWindow;}
-class RigidBody;
 class Actor;
+class RigidBody;
 
-
-struct CollisionPair 
+struct Collision 
 {
-	RigidBody* rigidBodyA;
-	RigidBody* rigidBodyB;
-};
-
-struct CollisionInfo 
-{
+	int rigidBodyA;
+	int rigidBodyB;
 	sf::Vector2<float> collisionNormal;
 	float penetration;
 };
@@ -29,14 +23,15 @@ class RigidBodySystem
 {
 private:
 	int nextId;	
-	map<CollisionPair, CollisionInfo> collisions;
+	list<Collision> collisions;
 	list<RigidBody> rigidBodies;
 	void IntegrateBodies(float dt);
 	void CheckCollisions();
 	void ResolveCollisions();
-	void PositionalCorrection(CollisionPair c);
+	void PositionalCorrection(Collision c);
 	float GetMin(float a, float b);
 	float Dot(sf::Vector2<float> vectorA, sf::Vector2<float> vectorB);
+	RigidBody* GetRigidBody(int id);
 
 public:
 	RigidBodySystem();

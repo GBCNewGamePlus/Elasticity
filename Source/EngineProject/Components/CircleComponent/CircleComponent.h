@@ -2,10 +2,7 @@
 #define __CIRCLE_COMPONENT_H__
 #include "../../Base/ActorComponent.h" 
 
-namespace sf{
-	class Color;
-
-}
+namespace sf{class Color;}
 
 class CircleComponent : public ActorComponent
 {

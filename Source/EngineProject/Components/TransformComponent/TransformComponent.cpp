@@ -43,18 +43,21 @@ TransformComponent::TransformComponent(sf::Vector2<float> trans, float angle, sf
 void TransformComponent::SetPosition(float x, float y)
 {
 	transform = transform.Identity;
+	translationv += sf::Vector2<float>(x, y);
 	transform.translate(x, y);
 }
 
 void TransformComponent::SetRotation(float angle)
 {
 	rotation = rotation.Identity;
+	rotationv += angle;
 	rotation.rotate(angle);
 }
 
 void TransformComponent::SetScale(float x, float y)
 {
 	scale = scale.Identity;
+	scalev += sf::Vector2<float>(x, y);
 	scale.scale(x, y);
 }
 

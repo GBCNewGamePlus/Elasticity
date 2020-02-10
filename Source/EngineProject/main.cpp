@@ -25,7 +25,8 @@
 using namespace std;
 using namespace LuaPlus;
 
-void MyMouseFunction(const Event& e) {
+void MyMouseFunction(const Event& e) 
+{
 	if (e.descriptor == EventType::MouseEvent)
 	{
 		char number[10];

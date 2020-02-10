@@ -33,9 +33,7 @@ GameEngine::~GameEngine()
 {
 }
 
-/*
- * Log functions
- */
+// Log Functions
 void GameEngine::PrintToWindow(string message) 
 {
 }
@@ -48,10 +46,7 @@ void GameEngine::Print(string message)
 	OutputDebugStringA(buf);
 }
 
-/*
- * Initialization Functions
- */
-
+// Initialize Functions
 bool GameEngine::IsOnlyInstance(LPCTSTR gameTitle)
 {
 	HANDLE handle = CreateMutex(NULL, TRUE, gameTitle);
@@ -229,10 +224,7 @@ void GameEngine::ReadCPUSpeed()
 	Print(cpuType);
 }
 
-/*
- * The real game engine
- */
-
+// Real Game Engine
 bool GameEngine::InitInstance(string _szTitle)
 {
 	szTitle = _szTitle;
@@ -254,8 +246,6 @@ bool GameEngine::InitInstance(string _szTitle)
 		currentState = GameState::Exiting;
 		return false;
 	}
-
-	
 }
 
 void GameEngine::RenderSplashScreen()
@@ -283,13 +273,11 @@ void GameEngine::RenderSplashScreen()
 	}
 }
 
-
 void GameEngine::Run()
 {
 	RenderingSystem rs(window);
 	InputSystem is(window);
 	ScriptSystem ss(&actors);
-
 	MSG msg;
 	ss.Run();
 	float oldTime = clock();
@@ -314,6 +302,8 @@ void GameEngine::Run()
 		{
 			(*it)->Update(deltaTime);
 		}
+
+		rigidBodySystem.UpdatePhysics(&actors, deltaTime);
 		/*
 		 * Renders updated actors
 		 */
