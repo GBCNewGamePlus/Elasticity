@@ -11,43 +11,43 @@ RigidBodySystem::RigidBodySystem()
 
 RigidBody* RigidBodySystem::GetRigidBody(int id)
 {
-	list<RigidBody>::iterator rb;
+	list<RigidBody*>::iterator rb;
 	for (rb = rigidBodies.begin(); rb != rigidBodies.end(); ++rb)
 	{
-		if (rb->id == id)
+		if (*(&(*rb)->id) == id)
 		{
-			return &(*rb);
+			return *rb;
 		}
 	}
 	return NULL;
 }
 
-void RigidBodySystem::AddRigidBody(RigidBody rigidBody) 
+void RigidBodySystem::AddRigidBody(RigidBody* rigidBody) 
 {
-	rigidBody.id = nextId;
+	rigidBody->id = nextId;
 	nextId++;
 	rigidBodies.push_back(rigidBody);
 }
 
 void RigidBodySystem::IntegrateBodies(float dt) 
 {
-	list <RigidBody> ::iterator rb;
+	list<RigidBody*>::iterator rb;
 	for (rb = rigidBodies.begin(); rb != rigidBodies.end(); ++rb)
 	{
-		(*rb).Integrate(dt);
+		//(*rb)->Integrate(dt);
 	}
 }
 
 bool RigidBodySystem::IsGrounded(RigidBody rigidBody) 
 {
-	list <RigidBody> ::iterator rb;
+	list <RigidBody*> ::iterator rb;
 	for (rb = rigidBodies.begin(); rb != rigidBodies.end(); ++rb) 
 	{
-		if ((*rb).id != rigidBody.id) 
+		if ((*rb)->id != rigidBody.id) 
 		{
-			if (rigidBody.aabb.bLeft.x < (*rb).aabb.tRight.x && 
-				rigidBody.aabb.tRight.x > (*rb).aabb.bLeft.x && 
-				abs(rigidBody.aabb.bLeft.y - (*rb).aabb.tRight.y) <= groundedTol) 
+			if (rigidBody.aabb.bLeft.x < (*rb)->aabb.tRight.x && 
+				rigidBody.aabb.tRight.x > (*rb)->aabb.bLeft.x && 
+				abs(rigidBody.aabb.bLeft.y - (*rb)->aabb.tRight.y) <= groundedTol) 
 			{
 				if (abs(rigidBody.currentVelocity.y) < groundedTol)
 					return true;
@@ -59,30 +59,30 @@ bool RigidBodySystem::IsGrounded(RigidBody rigidBody)
 
 void RigidBodySystem::CheckCollisions()
 {
-	list <RigidBody> ::iterator bodyA, bodyB;
+	list<RigidBody*>::iterator bodyA, bodyB;
 	
 	for (bodyA = rigidBodies.begin(); bodyA != rigidBodies.end(); ++bodyA)
 	{
 		for (bodyB = rigidBodies.begin(); bodyB != rigidBodies.end(); ++bodyB) 
 		{
-			if ((*bodyA).id != (*bodyB).id) 
+			if ((*bodyA)->id != (*bodyB)->id) 
 			{
 				Collision collision;
-				collision.rigidBodyA = bodyA->id;
-				collision.rigidBodyB = bodyB->id;
+				collision.rigidBodyA = (*bodyA)->id;
+				collision.rigidBodyB = (*bodyB)->id;
 
 				// TO DO: Get positions from the transform components as parameters.
-				sf::Vector2<float> distance = bodyB->transform->GetLocation() - bodyA->transform->GetLocation();
+				sf::Vector2f distance = (*bodyB)->transform->GetLocation() - (*bodyA)->transform->GetLocation();
 
-				sf::Vector2<float> halfSizeA = ((*bodyA).aabb.tRight - (*bodyA).aabb.bLeft);
+				sf::Vector2f halfSizeA = ((*bodyA)->aabb.tRight - (*bodyA)->aabb.bLeft);
 				halfSizeA.x /= 2;
 				halfSizeA.y /= 2;
 
-				sf::Vector2<float> halfSizeB = ((*bodyB).aabb.tRight - (*bodyB).aabb.bLeft);
+				sf::Vector2f halfSizeB = ((*bodyB)->aabb.tRight - (*bodyB)->aabb.bLeft);
 				halfSizeB.x /= 2;
 				halfSizeB.y /= 2;
 
-				sf::Vector2<float> gap = sf::Vector2<float>(abs(distance.x), abs(distance.y)) - (halfSizeA + halfSizeB);
+				sf::Vector2f gap = sf::Vector2f(abs(distance.x), abs(distance.y)) - (halfSizeA + halfSizeB);
 
 				if (gap.x < 0 && gap.y < 0) 
 				{
@@ -99,22 +99,22 @@ void RigidBodySystem::CheckCollisions()
 					{
 						if (distance.x > 0) 
 						{
-							collision.collisionNormal = sf::Vector2<float>(1, 0);
+							collision.collisionNormal = sf::Vector2f(1, 0);
 						}
 						else 
 						{
-							collision.collisionNormal = sf::Vector2<float>(-1, 0);
+							collision.collisionNormal = sf::Vector2f(-1, 0);
 						}
 						collision.penetration = gap.x;
 					}
 					else {
 						if (distance.y > 0) 
 						{
-							collision.collisionNormal = sf::Vector2<float>(0, 1);
+							collision.collisionNormal = sf::Vector2f(0, 1);
 						}
 						else
 						{
-							collision.collisionNormal = sf::Vector2<float>(0, -1);
+							collision.collisionNormal = sf::Vector2f(0, -1);
 						}
 						collision.penetration = gap.y;
 					}
@@ -145,7 +145,7 @@ float RigidBodySystem::GetMin(float a, float b)
 	return b;
 }
 
-float RigidBodySystem::Dot(sf::Vector2<float> vectorA, sf::Vector2<float> vectorB)
+float RigidBodySystem::Dot(sf::Vector2f vectorA, sf::Vector2f vectorB)
 {
 	return (vectorA.x * vectorB.x) + (vectorA.y * vectorB.y);
 }
@@ -174,12 +174,12 @@ void RigidBodySystem::ResolveCollisions()
 
 		j /= invMassA + invMassB;
 
-		sf::Vector2<float> impulse = j * c->collisionNormal;
+		sf::Vector2f impulse = j * c->collisionNormal;
 
-		sf::Vector2<float> velocityA = invMassA * impulse;
-		sf::Vector2<float> velocityB = invMassB * impulse;
-		GetRigidBody(c->rigidBodyA)->AddVelocity(-velocityA);
-		GetRigidBody(c->rigidBodyB)->AddVelocity(velocityB);
+		sf::Vector2f velocityA = invMassA * impulse;
+		sf::Vector2f velocityB = invMassB * impulse;
+		//GetRigidBody(c->rigidBodyA)->AddVelocity(-velocityA);
+		//GetRigidBody(c->rigidBodyB)->AddVelocity(velocityB);
 
 		if (abs(c->penetration) > 0.01f)
 		{
@@ -203,13 +203,13 @@ void RigidBodySystem::PositionalCorrection(Collision c)
 	else
 		invMassB = 1 / GetRigidBody(c.rigidBodyB)->mass;
 
-	sf::Vector2<float> correction = ((c.penetration / (invMassA + invMassB)) * percent) * -c.collisionNormal;
+	sf::Vector2f correction = ((c.penetration / (invMassA + invMassB)) * percent) * -c.collisionNormal;
 
 	// TO DO: Get the position from the transform component as a function parameter.
-	//sf::Vector2<float> temp = c.rigidBodyA.transform.position;
+	//sf::Vector2f temp = c.rigidBodyA.transform.position;
 
 	// TO DO: Get rid of this line once you have a reference to the position.
-	sf::Vector2<float> temp = sf::Vector2<float>(0,0);
+	sf::Vector2f temp = sf::Vector2f(0,0);
 
 	// TO DO: Uncomment th following three lines onve you have access to the position.
 	temp -= invMassA * correction;

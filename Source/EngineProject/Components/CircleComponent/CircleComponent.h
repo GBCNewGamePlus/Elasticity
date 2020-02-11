@@ -1,8 +1,9 @@
+
 #ifndef __CIRCLE_COMPONENT_H__
 #define __CIRCLE_COMPONENT_H__
+#include <SFML/Graphics.hpp>
 #include "../../Base/ActorComponent.h" 
-
-namespace sf{class Color;}
+//namespace sf{class Color;}
 
 class CircleComponent : public ActorComponent
 {
@@ -20,7 +21,6 @@ private:
 	float radius;
 	sf::Color color;
 };
-
 #endif 
 
 

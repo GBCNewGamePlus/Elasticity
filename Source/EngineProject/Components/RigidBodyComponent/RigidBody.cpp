@@ -1,6 +1,6 @@
+#include "../CircleComponent/CircleComponent.h"
 #include "RigidBody.h"
 #include "../../Systems/RigidBodySystem.h"
-#include "../CircleComponent/CircleComponent.h"
 #include "../SquareComponent/SquareComponent.h"
 #include "../TransformComponent/TransformComponent.h"
 
@@ -11,26 +11,26 @@ RigidBody::RigidBody()
 	mass = 1.0f;
 	bounciness = 1.0f;
 	obeysGravity = true;
-	gravity = sf::Vector2<float>(0, -9.8f);
-	maxVelocity = sf::Vector2<float>(10.0f, 10.0f);
+	gravity = sf::Vector2f(0, -9.8f);
+	maxVelocity = sf::Vector2f(10.0f, 10.0f);
 	SetAABB();
-	rigidBodySystem->AddRigidBody(*this);
+	rigidBodySystem->AddRigidBody(this);
 }
 
-void RigidBody::AddVelocity(sf::Vector2<float> v)
+void RigidBody::AddVelocity(sf::Vector2f v)
 {
 	currentVelocity += v;
 }
 
-void RigidBody::AddForce(sf::Vector2<float> force)
+void RigidBody::AddForce(sf::Vector2f force)
 {
 	totalForces += force;
 }
 
 void RigidBody::Stop()
 {
-	currentVelocity = sf::Vector2<float>(0,0);
-	totalForces = sf::Vector2<float>(0, 0);
+	currentVelocity = sf::Vector2f(0,0);
+	totalForces = sf::Vector2f(0, 0);
 }
 
 bool RigidBody::IsGrounded()
@@ -41,8 +41,8 @@ bool RigidBody::IsGrounded()
 
 void RigidBody::SetAABB()
 {
-	sf::Vector2<float> center = transform->GetLocation();
-	sf::Vector2<float> size = transform->GetScale();
+	sf::Vector2f center = transform->GetLocation();
+	sf::Vector2f size = transform->GetScale();
 	if (circleComponent)
 	{
 		size.x = size.x * circleComponent->GetRadius();
@@ -55,13 +55,13 @@ void RigidBody::SetAABB()
 	}
 	Bounds bound(center, size);
 
-	aabb.bLeft = sf::Vector2<float>(bound.center.x - bound.extents.x, bound.center.y - bound.extents.y);
-	aabb.tRight = sf::Vector2<float>(bound.center.x + bound.extents.x, bound.center.y + bound.extents.y);
+	aabb.bLeft = sf::Vector2f(bound.center.x - bound.extents.x, bound.center.y - bound.extents.y);
+	aabb.tRight = sf::Vector2f(bound.center.x + bound.extents.x, bound.center.y + bound.extents.y);
 }
 
 void RigidBody::Integrate(float dt) 
 {
-	sf::Vector2<float> acceleration;
+	sf::Vector2f acceleration;
 
 	if (obeysGravity && !IsGrounded()) 
 	{
@@ -75,15 +75,15 @@ void RigidBody::Integrate(float dt)
 
 	acceleration += totalForces / mass;
 	if (mass == 0)
-		acceleration = sf::Vector2<float>(0,0);
+		acceleration = sf::Vector2f(0,0);
 
 	currentVelocity += acceleration * dt;
 
 	// TO DO: Access the transform component and update the position!
-	sf::Vector2<float> temp = transform->GetLocation();
+	sf::Vector2f temp = transform->GetLocation();
 	temp += currentVelocity * dt;
 	transform->SetPosition(temp.x, temp.y);
 
 	SetAABB();
-	totalForces = sf::Vector2<float>(0, 0);
+	totalForces = sf::Vector2f(0, 0);
 }
