@@ -10,6 +10,7 @@ AudioComponent::AudioComponent(std::string fN, bool l, float p, float v)
 		music.setPitch(pitch);
 		volume = v;
 		music.setVolume(volume);
+		componentName = "audioComponent";
 }
 
 bool AudioComponent::Play()

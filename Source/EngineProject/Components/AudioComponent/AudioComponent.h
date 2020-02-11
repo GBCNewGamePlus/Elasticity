@@ -28,4 +28,4 @@ public:
 };
 
 
-#endif // __COMPONENT_AUDIO_COMPONENT_H__
+#endif

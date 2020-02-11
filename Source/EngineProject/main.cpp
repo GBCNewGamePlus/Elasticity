@@ -9,6 +9,7 @@
 #include <winnt.h>
 #include <tchar.h>
 #include "GameEngine.h"
+
 #include "Base/Dispatcher.h"
 #include "Base/Event.h"
 #include "Events/EMouseEvent.h"
@@ -19,6 +20,7 @@
 #include "Components/CircleComponent/CircleComponent.h"
 #include "Components/SquareComponent/SquareComponent.h"
 #include "Components/TransformComponent/TransformComponent.h"
+#include "Components/AudioComponent/AudioComponent.h"
 
 # define GCC_NEW new(NORMAL_BLOCK,FILE, __LINE_)
 
@@ -94,6 +96,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLi
 
 		Actor* box2 = new Actor();
 		box2->AddComponent(new SquareComponent(50, sf::Color::Blue));
+		box2->AddComponent(new AudioComponent(std::string("elvis_return_x.wav"), true, 1.0f, 1.0f));
+		((AudioComponent*)box2->GetComponent("audioComponent"))->Play();
 		box2->tc->TranslateBy(600, 500);
 		box2->tc->RotateBy(45);
 
