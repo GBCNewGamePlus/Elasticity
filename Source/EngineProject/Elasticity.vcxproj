@@ -168,7 +168,6 @@ copy /y $(ProjectDir)ExternalDeps\SFML\lib\*.pdb $(TargetDir)
     <ClInclude Include="Components\AIComponent\IAIComponent.h" />
     <ClInclude Include="Components\AIComponent\PathfindingComponent.h" />
     <ClInclude Include="Components\AudioComponent\AudioComponent.h" />
-    <ClInclude Include="Components\AudioComponent\IAudioComponent.h" />
     <ClInclude Include="Components\CameraComponent\CameraComponent.h" />
     <ClInclude Include="Components\CameraComponent\ICameraComponent.h" />
     <ClInclude Include="Components\CanvasComponent\CanvasComponent.h" />

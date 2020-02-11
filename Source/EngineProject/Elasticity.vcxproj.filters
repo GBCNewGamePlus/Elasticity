@@ -158,9 +158,6 @@
     <ClInclude Include="Components\AIComponent\IAIComponent.h">
       <Filter>Components\AI</Filter>
     </ClInclude>
-    <ClInclude Include="Components\AudioComponent\IAudioComponent.h">
-      <Filter>Components\Audio</Filter>
-    </ClInclude>
     <ClInclude Include="Components\CameraComponent\ICameraComponent.h">
       <Filter>Components\Camera</Filter>
     </ClInclude>
