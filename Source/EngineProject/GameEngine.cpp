@@ -11,6 +11,7 @@
 #include "Systems/RenderingSystem.h"
 #include "Systems/InputSystem.h"
 #include <time.h>
+#include "Components/TransformComponent/TransformComponent.h"
 
 using namespace std;
 
@@ -268,6 +269,12 @@ void GameEngine::RenderSplashScreen()
 	sf::Sprite sprite(texture);
 	window->draw(sprite);
 	window->display();
+	music.setLoop(false);
+	music.openFromFile("Assets/Music/WMDM3_Nightlife_01.wav");
+	music.setVolume(40);
+
+	music.play();
+
 	sf::Event loadingEvent;
 	/*
 	 Displays our beautiful logo
@@ -294,6 +301,7 @@ void GameEngine::Run()
 	ss.Run();
 	float oldTime = clock();
 	float deltaTime;
+	float angle = 0;
 	while (rs.IsWindowOpen())
 	{
 		/*
@@ -310,9 +318,18 @@ void GameEngine::Run()
 		/*
 		 * Update Actors
 		 */
+		int counter = 0;
 		for (std::vector<Actor*>::iterator it = actors.begin(); it != actors.end(); ++it)
 		{
+			if (counter == 0) {
+				(*it)->tc->TranslateBy(0.01, 0.0);
+			}
+			if (counter == 1) {				
+				(*it)->tc->SetPosition(30 * sin(angle), 30 * cos(angle));
+				angle += 0.01;
+			}
 			(*it)->Update(deltaTime);
+			counter++;
 		}
 		/*
 		 * Renders updated actors
@@ -327,3 +344,7 @@ void GameEngine::AddActor(Actor* _actor)
 {
 	actors.push_back(_actor);
 }
+/*
+Actor* GameEngine::GetActor() {
+	return actors[]
+}*/

@@ -1,10 +1,12 @@
 #pragma once
 #ifndef __GAME_ENGINE_H__
 #define __GAME_ENGINE_H__
+#include <SFML/Audio.hpp>
 #include <windows.h>
 #include <tchar.h>
 #include <string>
 #include <vector>
+#include <map>
 #include "Base/Actor.h"
 
 using namespace std;
@@ -61,6 +63,7 @@ private:
 	 * Game Window
 	 */
 	sf::RenderWindow* window;
+	sf::Music music;
 
 
 public:
@@ -70,6 +73,7 @@ public:
 	void Print(string message);
 	void PrintToWindow(string message);
 	void AddActor(Actor* _actor);
+	//Actor* GetActor(int actorId);
 };
 #endif // __GAME_ENGINE_H__
 
