@@ -96,7 +96,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLi
 
 		Actor* box2 = new Actor();
 		box2->AddComponent(new SquareComponent(50, sf::Color::Blue));
-		box2->AddComponent(new AudioComponent(std::string("elvis_return_x.wav"), true, 1.0f, 1.0f));
+		box2->AddComponent(new AudioComponent(std::string("elvis_return_x.wav"), true, 1.0f, 100.0f));
 		((AudioComponent*)box2->GetComponent("audioComponent"))->Play();
 		box2->tc->TranslateBy(600, 500);
 		box2->tc->RotateBy(45);
