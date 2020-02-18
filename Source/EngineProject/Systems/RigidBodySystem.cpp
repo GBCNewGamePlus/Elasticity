@@ -5,8 +5,8 @@
 
 RigidBodySystem::RigidBodySystem()
 {
-	groundedTol = 0.1f;
 	nextId = 0;
+	groundedTol = 0.1f;
 }
 
 RigidBody* RigidBodySystem::GetRigidBody(int id)
@@ -26,7 +26,7 @@ void RigidBodySystem::AddRigidBody(RigidBody* rigidBody)
 {
 	rigidBody->id = nextId;
 	nextId++;
-	rigidBodies.push_back(rigidBody);
+	rigidBodies.push_front(rigidBody);
 }
 
 void RigidBodySystem::IntegrateBodies(float dt) 
@@ -34,7 +34,7 @@ void RigidBodySystem::IntegrateBodies(float dt)
 	list<RigidBody*>::iterator rb;
 	for (rb = rigidBodies.begin(); rb != rigidBodies.end(); ++rb)
 	{
-		//(*rb)->Integrate(dt);
+		(*rb)->Integrate(dt);
 	}
 }
 
@@ -226,6 +226,7 @@ void RigidBodySystem::UpdatePhysics(vector<Actor*>* actors, float dt)
 		RigidBody* rigidBody = (RigidBody*)(*it)->GetComponent("rigidBodyComponent");
 		if (rigidBody)
 		{
+			rigidBody->transform = (*it)->tc;
 			rigidBody->rigidBodySystem = this;
 			IntegrateBodies(dt);
 			CheckCollisions();

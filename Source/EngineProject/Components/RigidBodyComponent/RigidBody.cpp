@@ -41,8 +41,19 @@ bool RigidBody::IsGrounded()
 
 void RigidBody::SetAABB()
 {
-	sf::Vector2f center = transform->GetLocation();
-	sf::Vector2f size = transform->GetScale();
+	sf::Vector2f center;
+	sf::Vector2f size;
+	if (transform)
+	{
+		center = transform->GetLocation();
+		size = transform->GetScale();
+	}
+	else
+	{
+		center = sf::Vector2f(0, 0);
+		size = sf::Vector2f(0, 0);
+	}
+
 	if (circleComponent)
 	{
 		size.x = size.x * circleComponent->GetRadius();

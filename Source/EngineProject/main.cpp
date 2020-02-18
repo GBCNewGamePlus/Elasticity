@@ -19,6 +19,7 @@
 #include "Components/CircleComponent/CircleComponent.h"
 #include "Components/SquareComponent/SquareComponent.h"
 #include "Components/TransformComponent/TransformComponent.h"
+#include "Components/RigidBodyComponent/RigidBody.h"
 
 # define GCC_NEW new(NORMAL_BLOCK,FILE, __LINE_)
 
@@ -92,6 +93,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLi
 		box1->AddComponent(new SquareComponent(50, sf::Color::Red));
 		box1->tc->TranslateBy(500, 500);
 		box1->tc->RotateBy(45);
+		//box1->AddComponent(new RigidBody());
 
 		Actor* box2 = new Actor();
 		box2->AddComponent(new SquareComponent(50, sf::Color::Blue));
@@ -105,7 +107,6 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLi
 		/*
 		 * End of GAME CODE
 		 */
-
 
 		elasticity->Run();
 		delete(sun);
