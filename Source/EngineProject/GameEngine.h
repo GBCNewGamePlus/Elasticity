@@ -72,6 +72,8 @@ public:
 	void Print(string message);
 	void PrintToWindow(string message);
 	void AddActor(Actor* _actor);
+	float WindowWidth();   // These two are added by me (Ekin). 
+	float WindowHeight();  // It's nice to have access to your window boundaries.
 };
 #endif // __GAME_ENGINE_H__
 

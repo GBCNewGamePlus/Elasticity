@@ -11,6 +11,7 @@
 #include "Systems/RenderingSystem.h"
 #include "Systems/InputSystem.h"
 #include <time.h>
+#include "Components/CircleComponent/CircleComponent.h"
 
 using namespace std;
 
@@ -235,6 +236,13 @@ bool GameEngine::InitInstance(string _szTitle)
 	if (IsOnlyInstance(szTitle.c_str()))
 	{
 		Print("Starting system check...");
+
+		// Added by Ekin for testing purposes.
+		string windowDimensions = "Window Dimensions: ";
+		windowDimensions += to_string(window->getSize().x) + "x" + to_string(window->getSize().y);
+		Print(windowDimensions);
+		// End of Ekin's addition.
+
 		bool result = CheckStorage(DISK_SPACE_NEEDED) && CheckMemory(PHYSICAL_MEMORY_NEEDED, VIRTUAL_MEMORY_NEEDED);
 		if (result) { ReadCPUSpeed(); }
 		Print("Finished system check...");
@@ -303,6 +311,19 @@ void GameEngine::Run()
 			(*it)->Update(deltaTime);
 		}
 
+		// This is so bad...
+		if (actors[0]->Overlaps(actors[1]))
+		{
+			((CircleComponent*)actors[0]->GetComponent("circleComponent"))->SetColor(sf::Color::Red);
+			((CircleComponent*)actors[1]->GetComponent("circleComponent"))->SetColor(sf::Color::Red);
+		}
+		else
+		{
+			((CircleComponent*)actors[0]->GetComponent("circleComponent"))->SetColor(sf::Color::Green);
+			((CircleComponent*)actors[1]->GetComponent("circleComponent"))->SetColor(sf::Color::Blue);
+		}
+		// End of this is so bad...
+
 		rigidBodySystem.UpdatePhysics(&actors, deltaTime);
 		/*
 		 * Renders updated actors
@@ -316,4 +337,14 @@ void GameEngine::Run()
 void GameEngine::AddActor(Actor* _actor)
 {
 	actors.push_back(_actor);
+}
+
+float GameEngine::WindowWidth()
+{
+	return window->getSize().x;
+}
+
+float GameEngine::WindowHeight()
+{
+	return window->getSize().y;
 }

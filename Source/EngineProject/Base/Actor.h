@@ -4,6 +4,8 @@
 #include <windows.h>
 #include "ActorComponent.h"
 #include <vector>
+#include "SFML/System/Vector2.hpp"
+//#include "../Components/CircleComponent/CircleComponent.h"
 using namespace std;
 namespace sf
 {
@@ -19,6 +21,7 @@ private:
 
 public:
 	Actor();
+	Actor(string _tag);
 	~Actor(void);
 	void AddComponent(ActorComponent* _component);
 	ActorComponent* GetComponent(string componentName);
@@ -29,6 +32,8 @@ public:
 	void AddChild(Actor* s);
 	virtual void Update(float msec);
 	TransformComponent* tc;
+	string tag;
+	bool Overlaps(Actor* otherActor);
 
 protected:
 	Actor* parent;
