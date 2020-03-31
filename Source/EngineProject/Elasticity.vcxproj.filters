@@ -67,6 +67,9 @@
     <Filter Include="Components\Square">
       <UniqueIdentifier>{d0eb7c7c-5734-4d40-bffc-399cf9f71be5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\RigidBody">
+      <UniqueIdentifier>{95a9b949-de27-4f48-8970-cd4be181ae6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -143,6 +146,12 @@
     </ClCompile>
     <ClCompile Include="Components\SquareComponent\SquareComponent.cpp">
       <Filter>Components\Square</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\RigidBodyComponent\RigidBody.cpp">
+      <Filter>Components\RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\RigidBodySystem.cpp">
+      <Filter>Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +256,12 @@
     </ClInclude>
     <ClInclude Include="Components\SquareComponent\SquareComponent.h">
       <Filter>Components\Square</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RigidBodyComponent\RigidBody.h">
+      <Filter>Components\RigidBody</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\RigidBodySystem.h">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

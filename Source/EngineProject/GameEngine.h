@@ -8,6 +8,7 @@
 #include <vector>
 #include <map>
 #include "Base/Actor.h"
+#include "Systems/RigidBodySystem.h"
 
 using namespace std;
 
@@ -67,6 +68,7 @@ private:
 
 
 public:
+	RigidBodySystem rigidBodySystem;
 	static GameEngine* GetInstance();
 	bool InitInstance(string _szTitle);
 	void Run();

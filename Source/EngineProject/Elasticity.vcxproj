@@ -146,6 +146,7 @@ copy /y $(ProjectDir)ExternalDeps\SFML\lib\*.pdb $(TargetDir)
     <ClCompile Include="Components\LineRendererComponent\LineRendererComponent.cpp" />
     <ClCompile Include="Components\MeshRendererComponent\MeshRendererComponent.cpp" />
     <ClCompile Include="Components\PhysicsComponent\BoxColliderComponent.cpp" />
+    <ClCompile Include="Components\RigidBodyComponent\RigidBody.cpp" />
     <ClCompile Include="Components\ScriptComponent\ScriptComponent.cpp" />
     <ClCompile Include="Components\SquareComponent\SquareComponent.cpp" />
     <ClCompile Include="Components\TransformComponent\TransformComponent.cpp" />
@@ -155,6 +156,7 @@ copy /y $(ProjectDir)ExternalDeps\SFML\lib\*.pdb $(TargetDir)
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Systems\InputSystem.cpp" />
     <ClCompile Include="Systems\RenderingSystem.cpp" />
+    <ClCompile Include="Systems\RigidBodySystem.cpp" />
     <ClCompile Include="Systems\ScriptSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +185,7 @@ copy /y $(ProjectDir)ExternalDeps\SFML\lib\*.pdb $(TargetDir)
     <ClInclude Include="Components\MeshRendererComponent\MeshRendererComponent.h" />
     <ClInclude Include="Components\PhysicsComponent\BoxColliderComponent.h" />
     <ClInclude Include="Components\PhysicsComponent\IPhysicsComponent.h" />
+    <ClInclude Include="Components\RigidBodyComponent\RigidBody.h" />
     <ClInclude Include="Components\ScriptComponent\ScriptComponent.h" />
     <ClInclude Include="Components\SquareComponent\SquareComponent.h" />
     <ClInclude Include="Components\TransformComponent\TransformComponent.h" />
@@ -191,6 +194,7 @@ copy /y $(ProjectDir)ExternalDeps\SFML\lib\*.pdb $(TargetDir)
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="Systems\InputSystem.h" />
     <ClInclude Include="Systems\RenderingSystem.h" />
+    <ClInclude Include="Systems\RigidBodySystem.h" />
     <ClInclude Include="Systems\ScriptSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
