@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{4E6FBED5-EE33-4D82-8BC2-B0780CA73F83}</ProjectGuid>
     <RootNamespace>Elasticity</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -133,6 +133,7 @@ copy /y $(ProjectDir)ExternalDeps\SFML\lib\*.pdb $(TargetDir)
   <ItemGroup>
     <ClCompile Include="Assets\Scripts\GameKeyboardHandler.cpp" />
     <ClCompile Include="Assets\Scripts\GamePointerHandler.cpp" />
+    <ClCompile Include="A_StarComponent.cpp" />
     <ClCompile Include="Base\Actor.cpp" />
     <ClCompile Include="Base\Dispatcher.cpp" />
     <ClCompile Include="Base\GameCodeApp.cpp" />
@@ -153,6 +154,7 @@ copy /y $(ProjectDir)ExternalDeps\SFML\lib\*.pdb $(TargetDir)
     <ClCompile Include="Events\EKeyboardEvent.cpp" />
     <ClCompile Include="Events\EMouseEvent.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="GridSystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Systems\InputSystem.cpp" />
     <ClCompile Include="Systems\RenderingSystem.cpp" />
@@ -162,6 +164,7 @@ copy /y $(ProjectDir)ExternalDeps\SFML\lib\*.pdb $(TargetDir)
   <ItemGroup>
     <ClInclude Include="Assets\Scripts\GameKeyboardHandler.h" />
     <ClInclude Include="Assets\Scripts\GamePointerHandler.h" />
+    <ClInclude Include="A_StarComponent.h" />
     <ClInclude Include="Base\Actor.h" />
     <ClInclude Include="Base\ActorComponent.h" />
     <ClInclude Include="Base\Dispatcher.h" />
@@ -193,6 +196,7 @@ copy /y $(ProjectDir)ExternalDeps\SFML\lib\*.pdb $(TargetDir)
     <ClInclude Include="Events\EKeyboardEvent.h" />
     <ClInclude Include="Events\EMouseEvent.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="GridSystem.h" />
     <ClInclude Include="Systems\InputSystem.h" />
     <ClInclude Include="Systems\RenderingSystem.h" />
     <ClInclude Include="Systems\RigidBodySystem.h" />

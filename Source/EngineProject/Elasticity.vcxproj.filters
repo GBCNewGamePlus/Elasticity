@@ -153,6 +153,12 @@
     <ClCompile Include="Systems\RigidBodySystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="GridSystem.cpp">
+      <Filter>Components\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="A_StarComponent.cpp">
+      <Filter>Components\AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\GameCodeApp.h">
@@ -265,6 +271,12 @@
     </ClInclude>
     <ClInclude Include="Systems\RigidBodySystem.h">
       <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="GridSystem.h">
+      <Filter>Components\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="A_StarComponent.h">
+      <Filter>Components\AI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
