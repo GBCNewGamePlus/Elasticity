@@ -3,13 +3,15 @@
 
 #include "Base/ActorComponent.h" 
 #include <list>
+#include "SFML/System/Vector2.hpp"
 
 namespace Component {
 	struct gridSq {
 		int location[2]; //the grid coodrinate of the square
-		float locationF[2]; //the world coordinate of the square
+		sf::Vector2f locationF; //the world coordinate of the square
 		float size; //giving the length of the grid square
 		int value = 0; //the value used for tracking pathing
+		gridSq *parent = nullptr;
 		int g = 0; //the value to be modified for the individual tile's priority
 		int h = 0; //the value to be modified for each tile's distance to the target
 		
@@ -18,7 +20,8 @@ namespace Component {
 		
 		gridSq(int loc[2], float locf[2], float si) {
 			memcpy(location, loc, sizeof(location));
-			memcpy(locationF, locf, sizeof(locationF));
+			locationF.x = locf[0];
+			locationF.y = locf[1];
 			size = si;
 		}
 		void hAssign(int des[2]) { //don't call this it's used in the a*

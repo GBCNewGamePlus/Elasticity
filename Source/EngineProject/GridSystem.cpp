@@ -2,9 +2,9 @@
 
 void Component::GridSystem::ClearPath()
 {
-	openList->clear;
-	closedList->clear;
-	path->clear;
+	openList->clear();
+	closedList->clear();
+	path->clear();
 }
 
 void Component::GridSystem::surroundUpdate(int loc[2])
@@ -50,7 +50,7 @@ list<Component::gridSq>* Component::GridSystem::FindPath(int loc[2], int des[2])
 	}
 	ClearPath();
 	openList->push_back(*currentTile);
-	while (!openList->empty) { //while there are tiles still to check
+	while (!openList->empty()) { //while there are tiles still to check
 		gridSq* temp;
 		for (Component::gridSq q : *openList) { //here we're grabbing the lowest priority value from the list of open tiles, aka, the current closest option
 			if (&temp == nullptr) {
@@ -63,7 +63,12 @@ list<Component::gridSq>* Component::GridSystem::FindPath(int loc[2], int des[2])
 			}
 		}
 		if (temp->h == 0) { //if h = 0 then we've hit the target, so we add it to the path and return
-			path->push_back(*temp);
+			path->push_front(*temp);
+			gridSq* writer = temp;
+			while (writer->parent != nullptr) { //now we're going back through the path we took and adding them all to the list to send
+				path->push_front(*writer->parent);
+				writer = writer->parent;
+			}
 			return path; //WE'RE DONE BOYS
 		}
 		openList->remove(*temp);
@@ -77,7 +82,15 @@ list<Component::gridSq>* Component::GridSystem::FindPath(int loc[2], int des[2])
 						closedCheck = true;
 					}
 				}
-				if (!closedCheck) { //once we've confirmed that it's not on the closed list we add it to the open list
+				if (!closedCheck) { //once we've confirmed that it's not on the closed list we check if it's parent is shorter and add it to the open list
+					if (check->parent != nullptr) {
+						if (check->parent->value > temp->value) {
+							check->parent = temp;
+						}
+					}
+					else {
+						check->parent = temp;
+					}
 					openList->push_front(*check);
 				}
 			}

@@ -3,6 +3,7 @@
 
 #include "Base/ActorComponent.h" 
 #include "GridSystem.h"
+#include "Components/TransformComponent/TransformComponent.h"
 
 namespace Component {
 
@@ -11,9 +12,11 @@ namespace Component {
 		int location[2];
 		GridSystem* gridControl;
 		list <gridSq> movePath;
+		bool moving = false;
+		sf::Vector2f totalMove;
 		A_StarComponent(GridSystem* papa, int loc[2]);
 		void FindPath(int destination[2]);
-		void MovePath();
+		void MovePath(TransformComponent ai, float increment);
 	};
 }
 
