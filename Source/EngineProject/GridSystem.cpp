@@ -7,20 +7,20 @@ void Component::GridSystem::ClearPath()
 	path->clear();
 }
 
-void Component::GridSystem::surroundUpdate(int loc[2])
+void Component::GridSystem::surroundUpdate(sf::Vector2<int> loc)
 {
 	surroundingTiles.clear();
-	surroundingTiles.push_back({ loc[0],   loc[1] -1 });
-	surroundingTiles.push_back({ loc[0]-1, loc[1] -1 });
-	surroundingTiles.push_back({ loc[0]-1, loc[1] });
-	surroundingTiles.push_back({ loc[0]-1, loc[1] +1 });
-	surroundingTiles.push_back({ loc[0],   loc[1] +1 });
-	surroundingTiles.push_back({ loc[0]+1, loc[1] +1 });
-	surroundingTiles.push_back({ loc[0]+1, loc[1] });
-	surroundingTiles.push_back({ loc[0]+1, loc[1] -1 });
+	surroundingTiles.push_back({ loc.x,   loc.y -1 });
+	surroundingTiles.push_back({ loc.x -1, loc.y -1 });
+	surroundingTiles.push_back({ loc.x -1, loc.y });
+	surroundingTiles.push_back({ loc.x-1, loc.y +1 });
+	surroundingTiles.push_back({ loc.x,   loc.y +1 });
+	surroundingTiles.push_back({ loc.x+1, loc.y +1 });
+	surroundingTiles.push_back({ loc.x+1, loc.y });
+	surroundingTiles.push_back({ loc.x+1, loc.y -1 });
 }
 
-Component::gridSq* Component::GridSystem::findTile(int ref[2])
+Component::gridSq* Component::GridSystem::findTile(sf::Vector2<int> ref)
 {
 	for (Component::gridSq x : grid) {
 		if (x.location == ref) {
@@ -39,10 +39,10 @@ Component::GridSystem::GridSystem(int gS, float s)
 
 }
 
-list<Component::gridSq>* Component::GridSystem::FindPath(int loc[2], int des[2])
+list<Component::gridSq>* Component::GridSystem::FindPath(sf::Vector2<int> loc, sf::Vector2<int> des)
 {
-	gridSq* currentTile;
-	gridSq* destinationTile;
+	Component::gridSq* currentTile;
+	Component::gridSq* destinationTile;
 	currentTile = findTile(loc);
 	destinationTile = findTile(des);
 	for (Component::gridSq x : grid) { //setting the h value for the whole grid, absolutely no idea if this is the most efficient way to do this
@@ -51,7 +51,8 @@ list<Component::gridSq>* Component::GridSystem::FindPath(int loc[2], int des[2])
 	ClearPath();
 	openList->push_back(*currentTile);
 	while (!openList->empty()) { //while there are tiles still to check
-		gridSq* temp;
+		Component::gridSq* temp;
+		temp = &openList->front();
 		for (Component::gridSq q : *openList) { //here we're grabbing the lowest priority value from the list of open tiles, aka, the current closest option
 			if (&temp == nullptr) {
 				temp = &q;
@@ -64,7 +65,7 @@ list<Component::gridSq>* Component::GridSystem::FindPath(int loc[2], int des[2])
 		}
 		if (temp->h == 0) { //if h = 0 then we've hit the target, so we add it to the path and return
 			path->push_front(*temp);
-			gridSq* writer = temp;
+			Component::gridSq* writer = temp;
 			while (writer->parent != nullptr) { //now we're going back through the path we took and adding them all to the list to send
 				path->push_front(*writer->parent);
 				writer = writer->parent;
@@ -73,12 +74,12 @@ list<Component::gridSq>* Component::GridSystem::FindPath(int loc[2], int des[2])
 		}
 		openList->remove(*temp);
 		surroundUpdate(temp->location);
-		for (int* x : surroundingTiles) { //now we check every surrounding tile for a value lower
-			gridSq* check = findTile(x);
+		for (sf::Vector2<int> x : surroundingTiles) { //now we check every surrounding tile for a value lower
+			Component::gridSq* check = findTile(x);
 			if (check->value < temp->value) {
 				bool closedCheck = false;
 				for (Component::gridSq q : *closedList) { //once we find one with a lower value we make sure it's not in the closed list
-					if (&q == check) {
+					if (q.location == check->location) {
 						closedCheck = true;
 					}
 				}

@@ -1,12 +1,13 @@
+
 #include "A_StarComponent.h"
-#include "SFML/System/Vector2.hpp"
-Component::A_StarComponent::A_StarComponent(GridSystem* papa, int loc[2])
+
+Component::A_StarComponent::A_StarComponent(GridSystem* papa, sf::Vector2<int> loc)
 {
 	gridControl = papa;
-	memcpy(location, loc, sizeof(location));
+	location = loc;
 }
 
-void Component::A_StarComponent::FindPath(int destination[2]) //call when you want the ai pathing updated
+void Component::A_StarComponent::FindPath(sf::Vector2<int> destination) //call when you want the ai pathing updated
 {
 	movePath = *gridControl->FindPath(location, destination);
 }
