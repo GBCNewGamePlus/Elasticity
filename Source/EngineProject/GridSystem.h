@@ -37,10 +37,10 @@ namespace Component {
 			value = g + h;
 		}
 	};
-	class GridSystem {
+	class GridSystem : public ActorComponent {
 	protected:
 		int gridSize = 15; //designates the grid as x by x
-		std::list <Component::gridSq> grid;
+		
 		float size; //designates size of the grid total which will be divided for each square
 		std::list<Component::gridSq>* closedList;
 		std::list<gridSq>* openList;
@@ -49,9 +49,12 @@ namespace Component {
 		
 		void ClearPath();
 		void surroundUpdate(sf::Vector2<int> loc);
-		Component::gridSq* findTile(sf::Vector2<int> ref);
+		
 		//here's all the tiles to be checked
 	public :
+		
+		Component::gridSq* findTile(sf::Vector2<int> ref);
+		std::list <Component::gridSq> grid;
 		GridSystem(int gS, float s);
 		std::list <Component::gridSq>* FindPath(sf::Vector2<int> loc, sf::Vector2<int> des);
 	    void AlterGrid(int size);

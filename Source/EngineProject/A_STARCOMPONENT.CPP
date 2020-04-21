@@ -1,10 +1,12 @@
 
 #include "A_StarComponent.h"
 
-Component::A_StarComponent::A_StarComponent(GridSystem* papa, sf::Vector2<int> loc)
+Component::A_StarComponent::A_StarComponent(TransformComponent* self, GridSystem* papa, sf::Vector2<int> loc)
 {
 	gridControl = papa;
 	location = loc;
+	componentName = "A_StarComponent";
+	self->SetPosition(papa->findTile(location)->locationF.x, papa->findTile(location)->locationF.y);
 }
 
 void Component::A_StarComponent::FindPath(sf::Vector2<int> destination) //call when you want the ai pathing updated

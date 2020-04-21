@@ -20,6 +20,8 @@
 #include "Components/SquareComponent/SquareComponent.h"
 #include "Components/TransformComponent/TransformComponent.h"
 #include "Components/RigidBodyComponent/RigidBody.h"
+#include "GridSystem.h"
+#include "A_StarComponent.h"
 
 # define GCC_NEW new(NORMAL_BLOCK,FILE, __LINE_)
 
@@ -78,8 +80,19 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE previousInstance, PSTR cmdLi
 		blueCircle->AddComponent(new CircleComponent(50, sf::Color::Blue));
 		blueCircle->tc->TranslateBy(elasticity->WindowWidth() - 100, elasticity->WindowHeight() / 2 - 50);
 
+		Actor* gridCon = new Actor("gridCon");
+		gridCon->AddComponent(new Component::GridSystem(10, 10.0f));
+
+		Actor* aiTest = new Actor("aiTest");
+		aiTest->AddComponent(new Component::A_StarComponent(aiTest->tc, static_cast<Component::GridSystem*>(gridCon->GetComponent("GridSystem")),sf::Vector2<int>{ 1,1 }));
+		aiTest->AddComponent(new CircleComponent(10, sf::Color::Magenta));
+
+		//static_cast<Component::A_StarComponent*>(aiTest->GetComponent("A_StarComponent"))->FindPath(sf::Vector2<int>{9, 9});
+		//static_cast<Component::A_StarComponent*>(aiTest->GetComponent("A_StarComponent"))->MovePath(*aiTest->tc,5);
+
 		elasticity->AddActor(greenCircle);
 		elasticity->AddActor(blueCircle);
+		elasticity->AddActor(aiTest);
 		/*
 		 * End of GAME CODE
 		 */

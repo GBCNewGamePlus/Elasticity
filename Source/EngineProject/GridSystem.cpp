@@ -34,7 +34,7 @@ Component::GridSystem::GridSystem(int gS, float s)
 {
 	gridSize = gS; //establish number of squares
 	size = s; //establish size of grid
-	
+	componentName = "GridSystem";
 	GridReset();
 
 }

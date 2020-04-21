@@ -16,7 +16,7 @@ namespace Component {
 		list <gridSq> movePath;
 		bool moving = false;
 		sf::Vector2f totalMove;
-		A_StarComponent(GridSystem* papa, sf::Vector2<int> loc);
+		A_StarComponent(TransformComponent* self, GridSystem* papa, sf::Vector2<int> loc);
 		void FindPath(sf::Vector2<int> destination);
 		void MovePath(TransformComponent ai, float increment);
 	};
